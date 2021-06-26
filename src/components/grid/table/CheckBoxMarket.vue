@@ -1,6 +1,6 @@
 <template>
-  <template v-for="item in market" :key="item.id">
-    <div>
+  <p>
+    <template v-for="item in market" :key="item.id">
       <input
         type="checkbox"
         @change="change"
@@ -9,9 +9,11 @@
         :value="item.id"
         checked
       />
-      <label :for="'CheckBoxMarket_' + item.id"> {{ item.nm }}</label>
-    </div>
-  </template>
+      <label :for="'CheckBoxMarket_' + item.id">
+        {{ item.nm }}
+      </label>
+    </template>
+  </p>
 </template>
 <script>
 export default {
@@ -25,11 +27,11 @@ export default {
       market: [
         {
           id: "KOSPI",
-          nm: "코스피",
+          nm: "코스피 | ",
         },
         {
           id: "KOSDAQ",
-          nm: "코스닥",
+          nm: "코스닥 | ",
         },
         {
           id: "KONEX",

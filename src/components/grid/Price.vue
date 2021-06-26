@@ -1,5 +1,6 @@
 <template>
-  <CheckBoxMarket   v-model:chked="param.market" />
+  <CheckBoxMarket v-model:chked="param.market" />
+  <CheckBoxState v-model:state="param.state" />
 
   <div style="overflow-x: auto">
     <table border="1" id="stock_tb">
@@ -32,6 +33,7 @@
 import TableTr from "@/components/grid/table/Tr.vue";
 import TableTh from "@/components/grid/table/Th.vue";
 import CheckBoxMarket from "@/components/grid/table/CheckBoxMarket.vue";
+import CheckBoxState from "@/components/grid/table/CheckBoxState.vue";
 // import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -39,6 +41,7 @@ export default {
     TableTr,
     TableTh,
     CheckBoxMarket,
+    CheckBoxState,
   },
   watch: {
     param: {
