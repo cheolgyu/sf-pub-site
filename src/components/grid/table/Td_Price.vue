@@ -4,7 +4,9 @@
   <td class="tc">{{ x2 }}</td>
   <td class="tr">{{ y2 }}</td>
   <td class="tr">{{ tick }}</td>
-  <td class="tr" :class="color()"><b>{{ percent }}</b></td>
+  <td class="tr" :class="color()">
+    <b>{{ percent }}</b>
+  </td>
 </template>
 f
 <script>
@@ -14,15 +16,29 @@ export default {
   },
   data() {
     return {
-      x1: this.fmt_date(this.item[0]),
-      y1: this.fmt_money(this.item[1]),
-      x2: this.fmt_date(this.item[2]),
-      y2: this.fmt_money(this.item[3]),
-      tick: this.item[4],
-      percent: this.item[5],
     };
   },
   setup() {},
+  computed: {
+    x1() {
+      return this.fmt_date(this.item[0]);
+    },
+    y1() {
+      return this.fmt_money(this.item[1]);
+    },
+    x2() {
+      return this.fmt_date(this.item[2]);
+    },
+    y2() {
+      return this.fmt_money(this.item[3]);
+    },
+    tick() {
+      return this.item[4];
+    },
+    percent() {
+      return this.item[5];
+    },
+  },
   methods: {
     fmt_date(s) {
       var yy = s.slice(0, 4);

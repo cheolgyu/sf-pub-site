@@ -1,5 +1,6 @@
 <template>
-  <button @click="fetchData">fetchData</button>
+  <CheckBoxMarket   v-model:chked="param.market" />
+
   <div style="overflow-x: auto">
     <table border="1" id="stock_tb">
       <thead>
@@ -12,7 +13,11 @@
           <th colspan="1"></th>
         </tr>
         <tr>
-          <th v-for="item in head" :key="item">{{ item.txt }}</th>
+          <TableTh
+            :items="head"
+            v-model:sort_id="param.sort"
+            v-model:sort_desc="param.desc"
+          />
         </tr>
       </thead>
       <tbody>
@@ -25,11 +30,23 @@
 </template>
 <script>
 import TableTr from "@/components/grid/table/Tr.vue";
+import TableTh from "@/components/grid/table/Th.vue";
+import CheckBoxMarket from "@/components/grid/table/CheckBoxMarket.vue";
 // import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
     TableTr,
+    TableTh,
+    CheckBoxMarket,
+  },
+  watch: {
+    param: {
+      handler() {
+        this.fetchData();
+      },
+      deep: true,
+    },
   },
   data() {
     return {
@@ -72,6 +89,7 @@ export default {
         rows: 30,
         state: "",
         sort: "cp_y_percent",
+        desc: true,
         market: ["KOSPI", "KOSDAQ", "KONEX"],
         search: "",
       },
