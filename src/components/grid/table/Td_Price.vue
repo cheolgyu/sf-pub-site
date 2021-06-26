@@ -1,0 +1,68 @@
+<template>
+  <td class="tc">{{ x1 }}</td>
+  <td class="tr">{{ y1 }}</td>
+  <td class="tc">{{ x2 }}</td>
+  <td class="tr">{{ y2 }}</td>
+  <td class="tr">{{ tick }}</td>
+  <td class="tr" :class="color()"><b>{{ percent }}</b></td>
+</template>
+f
+<script>
+export default {
+  props: {
+    item: Array,
+  },
+  data() {
+    return {
+      x1: this.fmt_date(this.item[0]),
+      y1: this.fmt_money(this.item[1]),
+      x2: this.fmt_date(this.item[2]),
+      y2: this.fmt_money(this.item[3]),
+      tick: this.item[4],
+      percent: this.item[5],
+    };
+  },
+  setup() {},
+  methods: {
+    fmt_date(s) {
+      var yy = s.slice(0, 4);
+      var mm = s.slice(4, 6);
+      var dd = s.slice(6, 8);
+      return yy + "-" + mm + "-" + dd;
+    },
+    fmt_money(s) {
+      return new Intl.NumberFormat().format(s);
+    },
+    color() {
+      if (this.percent > 0) {
+        return "txt-red";
+      } else if (this.percent == 0) {
+        return "txt-black";
+      } else if (this.percent < 0) {
+        return "txt-blue ";
+      }
+    },
+  },
+};
+</script>
+<style lang="scss">
+.txt-red {
+  color: red;
+}
+.txt-blue {
+  color: blue;
+}
+.txt-black {
+  color: black;
+}
+.tl {
+  text-align: left;
+}
+.tr {
+  text-align: right;
+}
+.tc {
+  text-align: center;
+}
+</style>
+  
