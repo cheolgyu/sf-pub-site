@@ -4,6 +4,9 @@
 
   <div style="overflow-x: auto">
     <table border="1" id="stock_tb">
+      <caption>
+        종목 목록
+      </caption>  
       <thead>
         <tr>
           <th colspan="2"></th>
@@ -34,7 +37,6 @@ import TableTr from "@/components/grid/table/Tr.vue";
 import TableTh from "@/components/grid/table/Th.vue";
 import CheckBoxMarket from "@/components/grid/table/CheckBoxMarket.vue";
 import CheckBoxState from "@/components/grid/table/CheckBoxState.vue";
-// import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -89,8 +91,8 @@ export default {
       ],
       param: {
         page: 1,
-        rows: 30,
-        state: "",
+        rows: 10,
+        state: ["stop::false"],
         sort: "cp_y_percent",
         desc: true,
         market: ["KOSPI", "KOSDAQ", "KONEX"],

@@ -1,27 +1,78 @@
 <template>
-  <p>
-    <template v-for="item in list" :key="item.id">
-      <input
-        type="radio"
-        @change="change"
-        :id="'CheckBoxState' + item.id"
-        :value="item.id"
-        checked
-      />
-      <label :for="'CheckBoxState' + item.id">
-        {{ item.snm }}
-      </label>
-    </template>
-  </p>
+  <details>
+    <summary>종목상태-상세</summary>
+    <table>
+      <thead>
+        <tr>
+          <th>상태</th>
+          <th>모두</th>
+          <th>활성만 조회</th>
+          <th>비활성만 조회</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in list" :key="item.id">
+          <td class="tc">{{ item.fnm }}</td>
+          <td>
+            <input
+              type="radio"
+              @change="change(item, 'all')"
+              :id="'CheckBoxState_all_' + item.id"
+              :name="item.id"
+              value="all"
+              :checked="default_chk(item, 'all')"
+            />
+            <label :for="'CheckBoxState_all_' + item.id"> 모두 </label>
+          </td>
+          <td>
+            <input
+              type="radio"
+              @change="change(item, 'true')"
+              :id="'CheckBoxState_t_' + item.id"
+              :name="item.id"
+              value="true"
+              :checked="default_chk(item, 'true')"
+            />
+            <label :for="'CheckBoxState_t_' + item.id"> 활성 </label>
+          </td>
+          <td>
+            <input
+              type="radio"
+              @change="change(item, 'false')"
+              :id="'CheckBoxState_f_' + item.id"
+              :name="item.id"
+              value="false"
+              :checked="default_chk(item, 'false')"
+            />
+            <label :for="'CheckBoxState_f_' + item.id"> 비활성 </label>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </details>
 </template>
 <script>
+const default_state = new Map([
+  ["stop", "false"],
+  ["clear", "all"],
+  ["managed", "all"],
+  ["ventilation", "all"],
+  ["unfaithful", "all"],
+  ["low_liquidity", "all"],
+  ["lack_listed", "all"],
+  ["overheated", "all"],
+  ["caution", "all"],
+  ["warning", "all"],
+  ["risk", "all"],
+]);
 export default {
   props: {
-    state: String,
+    state: Array,
   },
   watch: {},
   data() {
     return {
+      selectValues: new Map(default_state),
       list: [
         {
           id: "stop",
@@ -104,14 +155,26 @@ export default {
     };
   },
   created() {},
+  computed: {},
   methods: {
-    change(event) {
-      if (this.checkedValues.length == 0 && !event.target.checked) {
-        event.target.checked = true;
-        this.checkedValues.push(event.target.value);
-      } else {
-        this.$emit("update:chked", this.checkedValues);
+    default_chk(item, value) {
+      var chk = false;
+      if (value == "false" && item.id == "stop") {
+        chk = true;
+      } else if (value == "all" && item.id != "stop") {
+        chk = true;
       }
+      return chk;
+    },
+    change(item, value) {
+      this.selectValues.set(item.id, value);
+      var arr = [];
+      for (let [key, value] of this.selectValues) {
+        if (value != "all") {
+          arr.push(key + "::" + value);
+        }
+      }
+      this.$emit("update:state", arr);
     },
   },
   setup() {},

@@ -72,7 +72,7 @@ const priceStore = {
             url += `&rows=${p.rows}`
             url += `&sort=${p.sort}`
             url += `&desc=${p.desc}`
-            url += `&state=${p.state}`
+            url += `&state=${p.state.join()}`
             url += `&market=${p.market.join()}`
             url += `&search=${p.search}`
 

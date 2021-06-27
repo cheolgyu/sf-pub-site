@@ -27,15 +27,15 @@ export default {
       market: [
         {
           id: "KOSPI",
-          nm: "코스피 | ",
+          nm: "  코스피  ",
         },
         {
           id: "KOSDAQ",
-          nm: "코스닥 | ",
+          nm: "  코스닥  ",
         },
         {
           id: "KONEX",
-          nm: "코넥스",
+          nm: "  코넥스  ",
         },
       ],
     };
