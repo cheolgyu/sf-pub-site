@@ -1,12 +1,13 @@
 <template>
   <CheckBoxMarket v-model:chked="param.market" />
   <CheckBoxState v-model:state="param.state" />
+  <InputSearch v-model:search="param.search" />
 
   <div style="overflow-x: auto">
     <table border="1" id="stock_tb">
       <caption>
         종목 목록
-      </caption>  
+      </caption>
       <thead>
         <tr>
           <th colspan="2"></th>
@@ -17,11 +18,7 @@
           <th colspan="1"></th>
         </tr>
         <tr>
-          <TableTh
-            :items="head"
-            v-model:sort_id="param.sort"
-            v-model:sort_desc="param.desc"
-          />
+          <TableTh :items="head" @chage_sort="on_sort"  />
         </tr>
       </thead>
       <tbody>
@@ -30,6 +27,11 @@
         </template>
       </tbody>
     </table>
+    <Paging
+      :total="tb.full_count"
+      v-model:page="param.page"
+      v-model:rows="param.rows"
+    />
   </div>
 </template>
 <script>
@@ -37,6 +39,11 @@ import TableTr from "@/components/grid/table/Tr.vue";
 import TableTh from "@/components/grid/table/Th.vue";
 import CheckBoxMarket from "@/components/grid/table/CheckBoxMarket.vue";
 import CheckBoxState from "@/components/grid/table/CheckBoxState.vue";
+import InputSearch from "@/components/grid/table/InputSearch.vue";
+import Paging from "@/components/grid/table/Paging.vue";
+
+const default_page = 1;
+//const default_rows = 10;
 
 export default {
   components: {
@@ -44,11 +51,37 @@ export default {
     TableTh,
     CheckBoxMarket,
     CheckBoxState,
+    InputSearch,
+    Paging,
   },
   watch: {
-    param: {
+    "param.page": {
       handler() {
         this.fetchData();
+      },
+      deep: true,
+    },
+    "param.rows": {
+      handler() {
+        this.fetchData();
+      },
+      deep: true,
+    },
+    "param.state": {
+      handler() {
+        this.default_page();
+      },
+      deep: true,
+    },
+    "param.market": {
+      handler() {
+        this.default_page();
+      },
+      deep: true,
+    },
+    "param.search": {
+      handler() {
+        this.default_page();
       },
       deep: true,
     },
@@ -120,15 +153,18 @@ export default {
     );
   },
   methods: {
+    on_sort(id, desc) {
+      this.param.sort = id;
+      this.param.desc = desc;
+      this.fetchData();
+    },
+    default_page() {
+      this.param.page = default_page;
+      //this.param.rows = default_rows;
+      this.fetchData();
+    },
     async fetchData() {
       this.tb.loading = true;
-      //   const { sortBy, sortDesc, page, itemsPerPage } = this.tb.options;
-      //   if (page != undefined) {
-      //     this.param.page = page;
-      //     this.param.rows = itemsPerPage;
-      //     this.param.sort = sortBy;
-      //     this.param.desc = sortDesc;
-      //   }
       const data = await this.$store.dispatch(
         "priceStore/getPrice",
         this.param

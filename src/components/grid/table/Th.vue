@@ -8,9 +8,8 @@
 export default {
   props: {
     items: Array,
-    sort_id: String,
-    sort_desc: Boolean
   },
+  emits: ["chage_sort"],
   data() {
     return {
       id: "",
@@ -20,12 +19,11 @@ export default {
   setup() {},
   methods: {
     sorting(item) {
-        if(item.sort){
-            this.id = item.id
-            this.desc = !this.desc
-            this.$emit('update:sort_id', this.id)
-            this.$emit('update:sort_desc', this.desc)
-        }
+      if (item.sort) {
+        this.id = item.id;
+        this.desc = !this.desc;
+        this.$emit("chage_sort", this.id, this.desc);
+      }
     },
     sortable(item) {
       if (item) {
