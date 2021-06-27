@@ -43,7 +43,7 @@
         item.hp_y_percent,
       ]"
     />
-    <td><a target="_blank" :href="naver_link">이동</a></td>
+    <td><a target="_blank" :href="link">이동</a></td>
     <!-- <td>{{ item.full_count }}</td> -->
   </tr>
 </template>
@@ -55,15 +55,27 @@ export default {
     TdPrice,
   },
   props: {
+    object: String,
     item: Object,
   },
   data() {
     return {
-      naver_link:
+      market_link:
+        "https://finance.naver.com/sise/sise_index.nhn?code=" + this.item.code,
+      price_link:
         "https://finance.naver.com/item/main.nhn?code=" + this.item.code,
     };
   },
   setup() {},
+  computed: {
+    link() {
+      if (this.object == "price") {
+        return this.price_link;
+      } else {
+        return this.market_link;
+      }
+    },
+  },
   methods: {},
 };
 </script>

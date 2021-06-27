@@ -1,17 +1,12 @@
 const priceStore = {
     namespaced: true,
-
     state: () => ({
-        items: [],//JSON.parse(localStorage.getItem("stock")),
         star: [],//JSON.parse(localStorage.getItem("star")),
         info: "",
-        market: [],
         chart: new Map(),
         company: new Map(),
     }),
-
     mutations: {
-
         toggle_star(state, code) {
             var star = state.star
 
@@ -33,17 +28,6 @@ const priceStore = {
 
             this.commit("stock/update_price", { code: code, exist: exist })
 
-        }, update_price(state, payload) {
-            var code = payload.code
-            var exist = payload.exist
-
-            state.items.price_not_stop.find((item) => {
-                if (item.short_code == code) {
-                    item.star = !exist;
-                    //console.log("변화", item.star, item)
-                }
-            });
-            localStorage.setItem("stock", JSON.stringify(state.items));
         }, set_info(state, payload) {
             var arr = payload[0].updated.split(".")
             arr[0].replace("T", "")
@@ -78,11 +62,22 @@ const priceStore = {
 
             const res = await this.$axios.get(url).then(function (resp) {
                 commit("set_info", resp.data.info)
-                commit("set_market", resp.data.market)
                 return resp.data.price
             })
             return res
-        }, async getDetailChart({ commit }, p) {
+        },
+        async getMarket({ commit }, p) {
+            var url = "market?"
+            url += `&sort=${p.sort}`
+            url += `&desc=${p.desc}`
+
+            const res = await this.$axios.get(url).then(function (resp) {
+                commit("set_info", resp.data.info)
+                return resp.data.market
+            })
+            return res
+        },
+        async getDetailChart({ commit }, p) {
 
             var url = `detail/chart/${p.code}?page=${p.page}`
 
@@ -99,7 +94,8 @@ const priceStore = {
                 return res
             })
             return res
-        }, async getDetailCompany({ commit }, p) {
+        },
+        async getDetailCompany({ commit }, p) {
 
             var url = `detail/company/${p.code}`
 

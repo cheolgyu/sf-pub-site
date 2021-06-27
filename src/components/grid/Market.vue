@@ -1,12 +1,8 @@
 <template>
-  <CheckBoxMarket v-model:chked="param.market" />
-  <CheckBoxState v-model:state="param.state" />
-  <InputSearch v-model:search="param.search" />
-
   <div style="overflow-x: auto">
-    <table border="1" id="stock_tb">
+    <table border="1" id="market_tb">
       <caption>
-        종목 목록
+        마켓 목록
       </caption>
       <thead>
         <tr>
@@ -18,74 +14,27 @@
           <th colspan="1"></th>
         </tr>
         <tr>
-          <TableTh :items="head" @chage_sort="on_sort"  />
+          <TableTh :items="head" @chage_sort="on_sort" />
         </tr>
       </thead>
       <tbody>
-        <template v-for="item in tb.price_list" :key="item.code">
-          <TableTr object="price" :item="item" />
+        <template
+          v-for="item in tb.list"
+          :key="item.code"
+        >
+          <TableTr object="market" :item="item" />
         </template>
       </tbody>
     </table>
-    <Paging
-      :total="tb.full_count"
-      v-model:page="param.page"
-      v-model:rows="param.rows"
-    />
   </div>
 </template>
 <script>
 import TableTr from "@/components/grid/table/Tr.vue";
 import TableTh from "@/components/grid/table/Th.vue";
-import CheckBoxMarket from "@/components/grid/table/CheckBoxMarket.vue";
-import CheckBoxState from "@/components/grid/table/CheckBoxState.vue";
-import InputSearch from "@/components/grid/table/InputSearch.vue";
-import Paging from "@/components/grid/table/Paging.vue";
-
-const default_page = 1;
-//const default_rows = 10;
 
 export default {
-  components: {
-    TableTr,
-    TableTh,
-    CheckBoxMarket,
-    CheckBoxState,
-    InputSearch,
-    Paging,
-  },
-  watch: {
-    "param.page": {
-      handler() {
-        this.fetchData();
-      },
-      deep: true,
-    },
-    "param.rows": {
-      handler() {
-        this.fetchData();
-      },
-      deep: true,
-    },
-    "param.state": {
-      handler() {
-        this.default_page();
-      },
-      deep: true,
-    },
-    "param.market": {
-      handler() {
-        this.default_page();
-      },
-      deep: true,
-    },
-    "param.search": {
-      handler() {
-        this.default_page();
-      },
-      deep: true,
-    },
-  },
+  components: { TableTr, TableTh },
+  watch: {},
   data() {
     return {
       head: [
@@ -122,21 +71,12 @@ export default {
 
         { id: "link", sort: false, txt: "네이버링크" },
       ],
+      tb: {
+        list: this.$store.state.priceStore.market,
+      },
       param: {
-        page: 1,
-        rows: 10,
-        state: ["stop::false"],
         sort: "cp_y_percent",
         desc: true,
-        market: ["KOSPI", "KOSDAQ", "KONEX"],
-        search: "",
-      },
-      tb: {
-        price_list: [],
-        full_count: 0,
-        loading: false,
-        options: {},
-        headers: [],
       },
     };
   },
@@ -158,27 +98,17 @@ export default {
       this.param.desc = desc;
       this.fetchData();
     },
-    default_page() {
-      this.param.page = default_page;
-      //this.param.rows = default_rows;
-      this.fetchData();
-    },
     async fetchData() {
-      this.tb.loading = true;
       const data = await this.$store.dispatch(
-        "priceStore/getPrice",
+        "priceStore/getMarket",
         this.param
       );
 
       if (data != null) {
-        this.tb.full_count = data[0].full_count;
-        this.tb.price_list = data;
+        this.tb.list = data;
       } else {
-        this.tb.full_count = 0;
-        this.tb.price_list = [];
+        this.tb.list = [];
       }
-
-      this.tb.loading = false;
     },
   },
   setup() {},
@@ -186,52 +116,4 @@ export default {
 </script>
 
 <style lang="scss">
-#stock_tb {
-  border: 1;
-}
-table {
-  border-collapse: collapse;
-  border: 2px solid rgb(200, 200, 200);
-  letter-spacing: 1px;
-  font-family: sans-serif;
-  font-size: 0.8rem;
-}
-
-table {
-  width: 90%;
-  margin: auto;
-}
-
-td,
-th {
-  border: 1px solid rgb(109, 108, 108);
-  padding: 7px 5px;
-}
-
-th {
-  background-color: rgb(104, 98, 98);
-}
-
-td {
-  text-align: center;
-}
-tr:nth-child(even) {
-  background-color: #777474;
-}
-tr:nth-child(odd) {
-  background-color: #a39f9f;
-}
-// tr:hover:nth-child(even) td {
-//   background-color: rgb(250, 250, 250);
-// }
-
-// tr:hover:nth-child(odd) td {
-//   background-color: rgb(240, 240, 240);
-// }
-tr:hover {
-  background-color: rgb(103, 136, 109);
-}
-// tr:hover {
-//   background-color: yellow ;
-// }
 </style>

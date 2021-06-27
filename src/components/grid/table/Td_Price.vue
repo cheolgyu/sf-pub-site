@@ -44,6 +44,9 @@ export default {
       var yy = s.slice(0, 4);
       var mm = s.slice(4, 6);
       var dd = s.slice(6, 8);
+      if(dd==""){
+        return "";
+      }
       return yy + "-" + mm + "-" + dd;
     },
     fmt_money(s) {
