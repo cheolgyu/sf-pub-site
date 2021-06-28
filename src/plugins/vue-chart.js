@@ -59,6 +59,4 @@ Chart.register(
 
 
 
-export default ({ app }, inject) => {
-    inject('chart', (ctx, config) => new Chart(ctx, config))
-}
+export default (ctx, config) => new Chart(ctx, config)

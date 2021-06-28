@@ -1,6 +1,10 @@
 <template>
   <tr>
-    <td>{{ item.name }}</td>
+    <td>
+      <b>
+        <a :href="to" class="a_color">{{ item.name }}</a>
+      </b>
+    </td>
     <td>{{ item.market }}</td>
 
     <TdPrice
@@ -68,6 +72,9 @@ export default {
   },
   setup() {},
   computed: {
+    to() {
+      return "/stock/" + this.item.code;
+    },
     link() {
       if (this.object == "price") {
         return this.price_link;
@@ -79,5 +86,10 @@ export default {
   methods: {},
 };
 </script>
+<style lang="scss">
+.a_color {
+  color: black;
+}
+</style>
 
 
