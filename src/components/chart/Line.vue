@@ -99,8 +99,8 @@ export default {
             intersect: false,
           },
 
-          // //가로세로 비율
-          //aspectRatio: window.innerWidth < 600 ? 1 : 3.5,
+          //가로세로 비율
+          aspectRatio: window.innerWidth < 600 ? 1 : 3.5,
 
           //차틑 겹치게
           responsive: true,
