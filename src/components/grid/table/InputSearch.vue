@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     change(event) {
-      console.log(event.target.value);
+      //console.log(event.target.value);
       this.$emit("update:search", event.target.value);
     },
   },
