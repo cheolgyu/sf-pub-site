@@ -33,10 +33,5 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.clickable {
-  cursor: pointer;
-}
-</style>
 
 

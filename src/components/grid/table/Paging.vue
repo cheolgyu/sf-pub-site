@@ -63,7 +63,7 @@ export default {
     },
     is_cur_btn(item) {
       if (item == this.page) {
-        return "cur_btn";
+        return "paging_cur_btn";
       }
       return "not_cur_btn";
     },
@@ -77,9 +77,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-.cur_btn {
-  background-color: burlywood;
-}
-</style>

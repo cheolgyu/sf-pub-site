@@ -1,0 +1,16 @@
+@use "sass:map";
+
+$price-colors: (
+    "up": red,
+    "down": blue,
+    "eq": black,
+);
+.txt-red {
+    color: map.get($price-colors, "up");
+}
+.txt-blue {
+    color: map.get($price-colors, "down");
+}
+.txt-black {
+    color: map.get($price-colors, "eq");
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="stock_view">
+  <div id="stock_view">
     <h1>저가에 사서 고가에 팔기</h1>
     <hr />
     <h3>
@@ -55,15 +55,3 @@ export default {
   setup() {},
 };
 </script>
-<style lang="scss">
-.stock_view {
-  width: 10 0%;
-  margin: auto;
-}
-.grid_market_area {
-  background-color: rgba(255, 255, 255, 0.259);
-}
-.grid_price_area {
-  background-color: rgb(42, 42, 42);
-}
-</style>``

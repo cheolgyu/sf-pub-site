@@ -1,6 +1,6 @@
 <template>
   <LayoutBaseHeader />
-  <main>
+  <main class="rule-1">
     <router-view />
   </main>
   <LayoutBaseFooter />
@@ -17,19 +17,8 @@ export default {
   setup() {},
 };
 </script>
-
-
 <style lang="scss">
-html {
-  background-color: black;
-}
-main {
-}
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #fbfbfb;
-}
+
+$variable: value 1;
+
 </style>

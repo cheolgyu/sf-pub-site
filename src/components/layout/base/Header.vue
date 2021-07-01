@@ -8,17 +8,3 @@
 <script>
 export default {};
 </script>
-<style lang="scss">
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #d3d3d4;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>

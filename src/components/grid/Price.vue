@@ -1,37 +1,44 @@
 <template>
-  <CheckBoxMarket v-model:chked="param.market" />
-  <CheckBoxState v-model:state="param.state" />
-  <InputSearch v-model:search="param.search" />
-
-  <div style="overflow-x: auto">
-    <table border="1" id="stock_tb">
-      <caption>
-        종목 목록
-      </caption>
-      <thead>
-        <tr>
-          <th colspan="2"></th>
-          <th colspan="6">종가</th>
-          <th colspan="6">시가</th>
-          <th colspan="6">저가</th>
-          <th colspan="6">고가</th>
-          <th colspan="1"></th>
-        </tr>
-        <tr>
-          <TableTh :items="head" @chage_sort="on_sort"  />
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="item in tb.price_list" :key="item.code">
-          <TableTr object="price" :item="item" />
-        </template>
-      </tbody>
-    </table>
-    <Paging
-      :total="tb.full_count"
-      v-model:page="param.page"
-      v-model:rows="param.rows"
-    />
+  <div class="grid_table_area">
+    <CheckBoxMarket v-model:chked="param.market" />
+    <CheckBoxState v-model:state="param.state" />
+    <InputSearch v-model:search="param.search" />
+    <br />
+    <br />
+    <div style="overflow-x: auto">
+      <table border="1" id="stock_tb">
+        <caption>
+          종목 목록
+        </caption>
+        <colgroup>
+          <col width="150px" />
+          <col width="50px" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+            <th colspan="6" @click="click_p_type('close')"><b>종</b>가</th>
+            <th colspan="6" @click="click_p_type('open')"><b>시</b>가</th>
+            <th colspan="6" @click="click_p_type('low')"><b>저</b>가</th>
+            <th colspan="6" @click="click_p_type('high')"><b>고</b>가</th>
+            <th colspan="1"></th>
+          </tr>
+          <tr>
+            <TableTh :items="head" @chage_sort="on_sort" />
+          </tr>
+        </thead>
+        <tbody>
+          <template v-for="item in tb.price_list" :key="item.code">
+            <TableTr object="price" :item="item" />
+          </template>
+        </tbody>
+      </table>
+      <Paging
+        :total="tb.full_count"
+        v-model:page="param.page"
+        v-model:rows="param.rows"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -153,6 +160,9 @@ export default {
     );
   },
   methods: {
+    click_p_type(p_type) {
+      console.log(p_type);
+    },
     on_sort(id, desc) {
       this.param.sort = id;
       this.param.desc = desc;
@@ -185,53 +195,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-#stock_tb {
-  border: 1;
-}
-table {
-  border-collapse: collapse;
-  border: 2px solid rgb(200, 200, 200);
-  letter-spacing: 1px;
-  font-family: sans-serif;
-  font-size: 0.8rem;
-}
-
-table {
-  width: 90%;
-  margin: auto;
-}
-
-td,
-th {
-  border: 1px solid rgb(109, 108, 108);
-  padding: 7px 5px;
-}
-
-th {
-  background-color: rgb(104, 98, 98);
-}
-
-td {
-  text-align: center;
-}
-tr:nth-child(even) {
-  background-color: #777474;
-}
-tr:nth-child(odd) {
-  background-color: #a39f9f;
-}
-// tr:hover:nth-child(even) td {
-//   background-color: rgb(250, 250, 250);
-// }
-
-// tr:hover:nth-child(odd) td {
-//   background-color: rgb(240, 240, 240);
-// }
-tr:hover {
-  background-color: rgb(103, 136, 109);
-}
-// tr:hover {
-//   background-color: yellow ;
-// }
-</style>

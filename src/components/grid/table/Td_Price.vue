@@ -64,24 +64,3 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.txt-red {
-  color: red;
-}
-.txt-blue {
-  color: blue;
-}
-.txt-black {
-  color: black;
-}
-.tl {
-  text-align: left;
-}
-.tr {
-  text-align: right;
-}
-.tc {
-  text-align: center;
-}
-</style>
-  

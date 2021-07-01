@@ -86,10 +86,6 @@ export default {
   methods: {},
 };
 </script>
-<style lang="scss" scoped>
-.a_color {
-  color: black;
-}
-</style>
+
 
 

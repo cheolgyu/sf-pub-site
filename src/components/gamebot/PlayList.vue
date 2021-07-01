@@ -52,9 +52,4 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-.play_area {
-  width: 800px;
-  margin: auto;
-}
-</style>
+

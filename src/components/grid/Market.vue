@@ -1,31 +1,30 @@
 <template>
-  <div style="overflow-x: auto">
-    <table border="1" id="market_tb">
-      <caption>
-        마켓 목록
-      </caption>
-      <thead>
-        <tr>
-          <th colspan="2"></th>
-          <th colspan="6">종가</th>
-          <th colspan="6">시가</th>
-          <th colspan="6">저가</th>
-          <th colspan="6">고가</th>
-          <th colspan="1"></th>
-        </tr>
-        <tr>
-          <TableTh :items="head" @chage_sort="on_sort" />
-        </tr>
-      </thead>
-      <tbody>
-        <template
-          v-for="item in tb.list"
-          :key="item.code"
-        >
-          <TableTr object="market" :item="item" />
-        </template>
-      </tbody>
-    </table>
+  <div class="grid_table_area">
+    <div style="overflow-x: auto">
+      <table border="1" id="market_tb">
+        <caption>
+          마켓 목록
+        </caption>
+        <thead>
+          <tr>
+            <th colspan="2"></th>
+            <th colspan="6">종가</th>
+            <th colspan="6">시가</th>
+            <th colspan="6">저가</th>
+            <th colspan="6">고가</th>
+            <th colspan="1"></th>
+          </tr>
+          <tr>
+            <TableTh :items="head" @chage_sort="on_sort" />
+          </tr>
+        </thead>
+        <tbody>
+          <template v-for="item in tb.list" :key="item.code">
+            <TableTr object="market" :item="item" />
+          </template>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 <script>
@@ -114,6 +113,3 @@ export default {
   setup() {},
 };
 </script>
-
-<style lang="scss">
-</style>

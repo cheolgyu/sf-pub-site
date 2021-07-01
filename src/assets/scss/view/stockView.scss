@@ -1,0 +1,73 @@
+#stock_view {
+    width: 10 0%;
+    margin: auto;
+    .grid_market_area {
+        background-color: rgba(255, 255, 255, 0.259);
+    }
+    .grid_price_area {
+        background-color: rgb(42, 42, 42);
+    }
+    .clickable {
+        cursor: pointer;
+    }
+    .a_color {
+        color: black;
+    }
+
+    .tl {
+        text-align: left;
+    }
+    .tr {
+        text-align: right;
+    }
+    .tc {
+        text-align: center;
+    }
+    .grid_table_area {
+        table {
+            border-collapse: collapse;
+            border: 2px solid rgb(200, 200, 200);
+            letter-spacing: 1px;
+            font-family: sans-serif;
+            font-size: 0.8rem;
+        }
+
+        table {
+            width: 90%;
+            margin: auto;
+        }
+
+        td,
+        th {
+            border: 1px solid rgb(109, 108, 108);
+            padding: 7px 5px;
+        }
+
+        th {
+            background-color: rgb(104, 98, 98);
+        }
+
+        td {
+            text-align: center;
+        }
+        tr:nth-child(even) {
+            background-color: #777474;
+        }
+        tr:nth-child(odd) {
+            background-color: #a39f9f;
+        }
+        // tr:hover:nth-child(even) td {
+        //   background-color: rgb(250, 250, 250);
+        // }
+
+        // tr:hover:nth-child(odd) td {
+        //   background-color: rgb(240, 240, 240);
+        // }
+        tr:hover {
+            background-color: rgb(103, 136, 109);
+        }
+        // tr:hover {
+        //   background-color: yellow ;
+        // }
+    }
+}
