@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import Stock from '../views/Stock.vue'
-import StockId from '../views/StockId.vue'
-import GameBot from '../views/GameBot.vue'
+import StockView from '../views/StockView.vue'
+import StockIdView from '../views/StockIdView.vue'
+import GameBotView from '../views/GameBotView.vue'
 
 const routes = [
   {
@@ -13,17 +13,17 @@ const routes = [
   {
     path: '/stock',
     name: 'Stock',
-    component: Stock
+    component: StockView
   },
   {
     path: '/stock/:id',
     name: 'StockId',
-    component: StockId
+    component: StockIdView
   },
   {
     path: '/gamebot',
     name: 'GameBot',
-    component: GameBot
+    component: GameBotView
   }
 ]
 
