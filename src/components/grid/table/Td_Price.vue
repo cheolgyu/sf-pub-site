@@ -1,11 +1,13 @@
 <template>
-  <td v-show="show_value" class="tc" :class="p_type">{{ x1 }}</td>
-  <td v-show="show_value" class="tr" :class="p_type">{{ y1 }}</td>
-  <td v-show="show_value" class="tc" :class="p_type">{{ x2 }}</td>
-  <td v-show="show_value" class="tr" :class="p_type">{{ y2 }}</td>
+  <td v-show="show_value" class="tc td_date" :class="p_type">{{ x1 }}</td>
+  <td v-show="show_value" class="tr td_price" :class="p_type">{{ y1 }}</td>
+
+  <td v-show="show_value" class="tc td_date" :class="p_type">{{ x2 }}</td>
+  <td v-show="show_value" class="tr td_price" :class="p_type">{{ y2 }}</td>
+  
   <td v-show="show_value" class="tr" :class="p_type">{{ tick }}</td>
   <td v-show="show_value" class="tr" :class="color()">
-    <b>{{ percent }}</b>
+  {{ percent }}
   </td>
 </template>
 f
@@ -48,7 +50,7 @@ export default {
       if (dd == "") {
         return "";
       }
-      return yy + "-" + mm + "-" + dd;
+      return yy + "." + mm + "." + dd;
     },
     fmt_money(s) {
       return new Intl.NumberFormat().format(s);

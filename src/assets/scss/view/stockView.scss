@@ -1,3 +1,6 @@
+$table_price_color : #000000;
+$table_date_color : #2a2a2a;
+
 #stock_view {
     font-size: 12px;
     width: 10 0%;
@@ -15,16 +18,22 @@
         color: black;
     }
 
-    .tl {
-        text-align: left;
-    }
-    .tr {
-        text-align: right;
-    }
-    .tc {
-        text-align: center;
-    }
     .grid_table_area {
+        .td_date {
+            color: $table_date_color;
+        }
+        .td_price {
+            color: $table_price_color;
+        }
+        .tl {
+            text-align: left;
+        }
+        .tr {
+            text-align: right;
+        }
+        .tc {
+            text-align: center;
+        }
         .p_type_th {
             height: 100px;
         }
@@ -34,7 +43,6 @@
             border: 2px solid rgb(200, 200, 200);
             letter-spacing: 1px;
             font-family: sans-serif;
-            
         }
 
         table {

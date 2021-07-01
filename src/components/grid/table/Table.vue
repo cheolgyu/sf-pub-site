@@ -1,62 +1,64 @@
 <template>
-  <table>
-    <caption>
-      {{
-        name
-      }}
-      <template v-for="(i, item) in p_show" :key="i">
-        <button :disabled="p_show[item]" @click="click_p_type(item)">
-          {{ p_text[item] }}
-        </button>
-      </template>
-    </caption>
-    <thead>
-      <tr>
-        <th colspan="2"></th>
-        <th
-          v-if="p_show['cp']"
-          class="p_type_th clickable"
-          colspan="6"
-          @click="click_p_type('cp')"
-        >
-          <b>종</b>가
-        </th>
-        <th
-          v-if="p_show['op']"
-          class="p_type_th clickable"
-          colspan="6"
-          @click="click_p_type('op')"
-        >
-          <b>시</b>가
-        </th>
-        <th
-          v-if="p_show['lp']"
-          class="p_type_th clickable"
-          colspan="6"
-          @click="click_p_type('lp')"
-        >
-          <b>저</b>가
-        </th>
-        <th
-          v-if="p_show['hp']"
-          class="p_type_th clickable"
-          colspan="6"
-          @click="click_p_type('hp')"
-        >
-          <b>고</b>가
-        </th>
-        <th class="p_type_th clickable" colspan="1"></th>
-      </tr>
-      <tr>
-        <TableTh :items="head" @chage_sort="on_sort" :p_show="p_show" />
-      </tr>
-    </thead>
-    <tbody>
-      <template v-for="item in items" :key="item.code">
-        <TableTr :object="object" :item="item" :p_show="p_show" />
-      </template>
-    </tbody>
-  </table>
+  <div style="overflow-x: auto">
+    <table>
+      <caption>
+        {{
+          name
+        }}
+        <template v-for="(i, item) in p_show" :key="i">
+          <button :disabled="p_show[item]" @click="click_p_type(item)">
+            {{ p_text[item] }}
+          </button>
+        </template>
+      </caption>
+      <thead>
+        <tr>
+          <th colspan="2"></th>
+          <th
+            v-if="p_show['cp']"
+            class="p_type_th clickable"
+            colspan="6"
+            @click="click_p_type('cp')"
+          >
+            <b>종</b>가
+          </th>
+          <th
+            v-if="p_show['op']"
+            class="p_type_th clickable"
+            colspan="6"
+            @click="click_p_type('op')"
+          >
+            <b>시</b>가
+          </th>
+          <th
+            v-if="p_show['lp']"
+            class="p_type_th clickable"
+            colspan="6"
+            @click="click_p_type('lp')"
+          >
+            <b>저</b>가
+          </th>
+          <th
+            v-if="p_show['hp']"
+            class="p_type_th clickable"
+            colspan="6"
+            @click="click_p_type('hp')"
+          >
+            <b>고</b>가
+          </th>
+          <th class="p_type_th clickable" colspan="1"></th>
+        </tr>
+        <tr>
+          <TableTh :items="head" @chage_sort="on_sort" :p_show="p_show" />
+        </tr>
+      </thead>
+      <tbody>
+        <template v-for="item in items" :key="item.code">
+          <TableTr :object="object" :item="item" :p_show="p_show" />
+        </template>
+      </tbody>
+    </table>
+  </div>
 </template>
 <script>
 import TableTr from "@/components/grid/table/Tr.vue";
@@ -79,28 +81,28 @@ export default {
         { id: "name", sort: true, txt: "이름" },
         { id: "market", sort: true, txt: "마켓" },
 
-        { p_type: "cp", id: "cp_x1", sort: true, txt: "시작-일" },
-        { p_type: "cp", id: "cp_y1", sort: true, txt: "시작-원" },
-        { p_type: "cp", id: "cp_x2", sort: true, txt: "종료-일" },
-        { p_type: "cp", id: "cp_y2", sort: true, txt: "종료-원" },
+        { p_type: "cp", id: "cp_x1", sort: true, txt: "시작.일" },
+        { p_type: "cp", id: "cp_y1", sort: true, txt: "시작.원" },
+        { p_type: "cp", id: "cp_x2", sort: true, txt: "종료.일" },
+        { p_type: "cp", id: "cp_y2", sort: true, txt: "종료.원" },
         { p_type: "cp", id: "cp_x_tick", sort: true, txt: "누적" },
         { p_type: "cp", id: "cp_y_percent", sort: true, txt: "퍼센트" },
-        { p_type: "op", id: "op_x1", sort: true, txt: "시작-일" },
-        { p_type: "op", id: "op_y1", sort: true, txt: "시작-원" },
-        { p_type: "op", id: "op_x2", sort: true, txt: "종료-일" },
-        { p_type: "op", id: "op_y2", sort: true, txt: "종료-원" },
+        { p_type: "op", id: "op_x1", sort: true, txt: "시작.일" },
+        { p_type: "op", id: "op_y1", sort: true, txt: "시작.원" },
+        { p_type: "op", id: "op_x2", sort: true, txt: "종료.일" },
+        { p_type: "op", id: "op_y2", sort: true, txt: "종료.원" },
         { p_type: "op", id: "op_x_tick", sort: true, txt: "누적" },
         { p_type: "op", id: "op_y_percent", sort: true, txt: "퍼센트" },
-        { p_type: "lp", id: "lp_x1", sort: true, txt: "시작-일" },
-        { p_type: "lp", id: "lp_y1", sort: true, txt: "시작-원" },
-        { p_type: "lp", id: "lp_x2", sort: true, txt: "종료-일" },
-        { p_type: "lp", id: "lp_y2", sort: true, txt: "종료-원" },
+        { p_type: "lp", id: "lp_x1", sort: true, txt: "시작.일" },
+        { p_type: "lp", id: "lp_y1", sort: true, txt: "시작.원" },
+        { p_type: "lp", id: "lp_x2", sort: true, txt: "종료.일" },
+        { p_type: "lp", id: "lp_y2", sort: true, txt: "종료.원" },
         { p_type: "lp", id: "lp_x_tick", sort: true, txt: "누적" },
         { p_type: "lp", id: "lp_y_percent", sort: true, txt: "퍼센트" },
-        { p_type: "hp", id: "hp_x1", sort: true, txt: "시작-일" },
-        { p_type: "hp", id: "hp_y1", sort: true, txt: "시작-원" },
-        { p_type: "hp", id: "hp_x2", sort: true, txt: "종료-일" },
-        { p_type: "hp", id: "hp_y2", sort: true, txt: "종료-원" },
+        { p_type: "hp", id: "hp_x1", sort: true, txt: "시작.일" },
+        { p_type: "hp", id: "hp_y1", sort: true, txt: "시작.원" },
+        { p_type: "hp", id: "hp_x2", sort: true, txt: "종료.일" },
+        { p_type: "hp", id: "hp_y2", sort: true, txt: "종료.원" },
         { p_type: "hp", id: "hp_x_tick", sort: true, txt: "누적" },
         { p_type: "hp", id: "hp_y_percent", sort: true, txt: "퍼센트" },
 

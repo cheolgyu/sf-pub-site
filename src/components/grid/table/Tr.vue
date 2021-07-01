@@ -1,11 +1,11 @@
 <template>
   <tr>
-    <td>
+    <td class="tl">
       <b>
         <a :href="to" class="a_color">{{ item.name }}</a>
       </b>
     </td>
-    <td>{{ item.market }}</td>
+    <td class="tl">{{ item.market }}</td>
 
     <TdPrice
       :p_type="p_type_cp"

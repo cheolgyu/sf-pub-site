@@ -1,13 +1,11 @@
 <template>
   <div class="grid_table_area">
-    <div style="overflow-x: auto">
-      <GridTable
-        :object="object"
-        :name="name"
-        :items="items"
-        @chage_sort="on_sort"
-      />
-    </div>
+    <GridTable
+      :object="object"
+      :name="name"
+      :items="items"
+      @chage_sort="on_sort"
+    />
   </div>
 </template>
 <script>

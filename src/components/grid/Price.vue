@@ -5,19 +5,21 @@
     <InputSearch v-model:search="param.search" />
     <br />
     <br />
-    <div style="overflow-x: auto">
-      <GridTable
-        :object="object"
-        :name="name"
-        :items="items"
-        @chage_sort="on_sort"
-      />
-      <Paging
-        :total="tb.full_count"
-        v-model:page="param.page"
-        v-model:rows="param.rows"
-      />
-    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <GridTable
+      :object="object"
+      :name="name"
+      :items="items"
+      @chage_sort="on_sort"
+    />
+    <Paging
+      :total="tb.full_count"
+      v-model:page="param.page"
+      v-model:rows="param.rows"
+    />
   </div>
 </template>
 <script>
