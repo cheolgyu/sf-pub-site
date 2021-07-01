@@ -1,5 +1,5 @@
 <template>
-  <table border="1" id="market_tb">
+  <table>
     <caption>
       {{
         name
@@ -53,7 +53,7 @@
     </thead>
     <tbody>
       <template v-for="item in items" :key="item.code">
-        <TableTr object="market" :item="item" :p_show="p_show" />
+        <TableTr :object="object" :item="item" :p_show="p_show" />
       </template>
     </tbody>
   </table>
@@ -64,6 +64,7 @@ import TableTh from "@/components/grid/table/Th.vue";
 
 export default {
   props: {
+    object: String,
     name: String,
     items: Array,
   },

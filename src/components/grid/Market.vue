@@ -1,20 +1,26 @@
 <template>
   <div class="grid_table_area">
     <div style="overflow-x: auto">
-      <Talbe :name="name" :items="items" @chage_sort="on_sort" />
+      <GridTable
+        :object="object"
+        :name="name"
+        :items="items"
+        @chage_sort="on_sort"
+      />
     </div>
   </div>
 </template>
 <script>
-import Talbe from "@/components/grid/table/Table.vue";
+import GridTable from "@/components/grid/table/Table.vue";
 
 export default {
-  components: { Talbe },
+  components: { GridTable },
   watch: {},
   data() {
     return {
       name: "마켓 목록",
-      items: this.$store.state.priceStore.market,
+      object: "market",
+      items: [],
       param: {
         sort: "cp_y_percent",
         desc: true,

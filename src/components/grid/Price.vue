@@ -6,7 +6,12 @@
     <br />
     <br />
     <div style="overflow-x: auto">
-      <GridTable :name="name" :items="items" @chage_sort="on_sort" />
+      <GridTable
+        :object="object"
+        :name="name"
+        :items="items"
+        @chage_sort="on_sort"
+      />
       <Paging
         :total="tb.full_count"
         v-model:page="param.page"
@@ -67,6 +72,7 @@ export default {
   },
   data() {
     return {
+      object: "price",
       name: "종목 목록",
       items: [],
 
