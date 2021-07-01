@@ -8,6 +8,8 @@
     <td>{{ item.market }}</td>
 
     <TdPrice
+      :p_type="p_type_cp"
+      :show_value="p_show[p_type_cp]"
       :item="[
         item.cp_x1,
         item.cp_y1,
@@ -18,6 +20,8 @@
       ]"
     />
     <TdPrice
+      :p_type="p_type_op"
+      :show_value="p_show[p_type_op]"
       :item="[
         item.op_x1,
         item.op_y1,
@@ -28,6 +32,8 @@
       ]"
     />
     <TdPrice
+      :p_type="p_type_lp"
+      :show_value="p_show[p_type_lp]"
       :item="[
         item.lp_x1,
         item.lp_y1,
@@ -38,6 +44,8 @@
       ]"
     />
     <TdPrice
+      :p_type="p_type_hp"
+      :show_value="p_show[p_type_hp]"
       :item="[
         item.hp_x1,
         item.hp_y1,
@@ -59,11 +67,16 @@ export default {
     TdPrice,
   },
   props: {
+    p_show: Object,
     object: String,
     item: Object,
   },
   data() {
     return {
+      p_type_cp: "cp",
+      p_type_op: "op",
+      p_type_lp: "lp",
+      p_type_hp: "hp",
       market_link:
         "https://finance.naver.com/sise/sise_index.nhn?code=" + this.item.code,
       price_link:

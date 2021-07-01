@@ -1,12 +1,29 @@
 <template>
   <template v-for="item in items" :key="item">
-    <th @click="sorting(item)" :class="sortable(item.sort)">{{ item.txt }}</th>
+    <template v-if="item.p_type">
+      <th
+        v-show="p_show[item.p_type]"
+        @click="sorting(item)"
+        :class="sortable(item.sort)"
+      >
+        {{ item.txt }}
+      </th>
+    </template>
+    <template v-else>
+      <th
+        @click="sorting(item)"
+        :class="sortable(item.sort)"
+      >
+        {{ item.txt }}
+      </th>
+    </template>
   </template>
 </template>
 
 <script>
 export default {
   props: {
+    p_show: Object,
     items: Array,
   },
   emits: ["chage_sort"],

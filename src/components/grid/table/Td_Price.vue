@@ -1,10 +1,10 @@
 <template>
-  <td class="tc">{{ x1 }}</td>
-  <td class="tr">{{ y1 }}</td>
-  <td class="tc">{{ x2 }}</td>
-  <td class="tr">{{ y2 }}</td>
-  <td class="tr">{{ tick }}</td>
-  <td class="tr" :class="color()">
+  <td v-show="show_value" class="tc" :class="p_type">{{ x1 }}</td>
+  <td v-show="show_value" class="tr" :class="p_type">{{ y1 }}</td>
+  <td v-show="show_value" class="tc" :class="p_type">{{ x2 }}</td>
+  <td v-show="show_value" class="tr" :class="p_type">{{ y2 }}</td>
+  <td v-show="show_value" class="tr" :class="p_type">{{ tick }}</td>
+  <td v-show="show_value" class="tr" :class="color()">
     <b>{{ percent }}</b>
   </td>
 </template>
@@ -12,11 +12,12 @@ f
 <script>
 export default {
   props: {
+    p_type: String,
+    show_value: Boolean,
     item: Array,
   },
   data() {
-    return {
-    };
+    return {};
   },
   setup() {},
   computed: {
@@ -44,7 +45,7 @@ export default {
       var yy = s.slice(0, 4);
       var mm = s.slice(4, 6);
       var dd = s.slice(6, 8);
-      if(dd==""){
+      if (dd == "") {
         return "";
       }
       return yy + "-" + mm + "-" + dd;
@@ -53,12 +54,14 @@ export default {
       return new Intl.NumberFormat().format(s);
     },
     color() {
+      var str = this.p_type + " ";
+
       if (this.percent > 0) {
-        return "txt-red";
+        return str + " txt-red";
       } else if (this.percent == 0) {
-        return "txt-black";
+        return str + "txt-black";
       } else if (this.percent < 0) {
-        return "txt-blue ";
+        return str + "txt-blue ";
       }
     },
   },
