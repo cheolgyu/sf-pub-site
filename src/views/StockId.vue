@@ -1,11 +1,11 @@
 <template>
   <hr />
   <h3>{{ title() }}</h3>
-  <CompanyDetail :data="company_detail" />
+  <CompanyDetail :data="company_detail" v-if="ready.company" />
   <br />
-  <CompanyState :data="company_state" />
+  <CompanyState :data="company_state" v-if="ready.company" />
   <br />
-  <details open>
+  <details open v-if="ready.chart">
     <summary>그래프</summary>
     <ChartLine />
   </details>
@@ -28,6 +28,11 @@ export default {
       company_code: {},
       company_detail: {},
       company_state: {},
+
+      ready: {
+        company: false,
+        chart: true,
+      },
     };
   },
   created() {
@@ -42,7 +47,7 @@ export default {
   computed: {},
   methods: {
     title() {
-      var aa = this.company_code.name + "(" + this.company_code.code + ")"
+      var aa = this.company_code.name + "(" + this.company_code.code + ")";
       return aa;
     },
     setData(company) {
@@ -56,11 +61,15 @@ export default {
         "priceStore/getDetailCompany",
         this.param
       );
+      
       if (data != null) {
         this.company_code = data.c;
-        this.company_detail = data.d;
-        this.company_detail.name = data.c.name;
-        this.company_state = data.s;
+        if (data.d !== undefined) {
+          this.company_detail = data.d;
+          this.company_detail.name = data.c.name;
+          this.company_state = data.s;
+          this.ready.company = true;
+        }
       }
       this.loading = false;
     },

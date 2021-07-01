@@ -100,12 +100,11 @@ const priceStore = {
             var url = `detail/company/${p.code}`
 
             const res = await this.$axios.get(url).then(function (resp) {
-
                 var res = {
                     code: p.code,
                     data: JSON.parse(resp.data)
                 }
-                commit("set_detail_company", res)
+                //commit("set_detail_company", res)
                 return res
             })
             return res.data
