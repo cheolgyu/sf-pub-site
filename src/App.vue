@@ -20,11 +20,10 @@ export default {
 
 
 <style lang="scss">
-html{
-   background-color: black;
+html {
+  background-color: black;
 }
-main{
-
+main {
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
