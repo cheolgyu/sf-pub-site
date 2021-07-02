@@ -86,7 +86,7 @@ export default {
   setup() {},
   computed: {
     to() {
-      return "/stock/" + this.item.code;
+      return "/stock/detail/" + this.item.code;
     },
     link() {
       if (this.object == "price") {

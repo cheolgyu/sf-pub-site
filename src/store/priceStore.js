@@ -108,7 +108,19 @@ const priceStore = {
                 return res
             })
             return res.data
-        }
+        }, async geDayTrading({ commit }, p) {
+            var url = "day_trading?"
+            url += `&market=${p.market}`
+            url += `&start=${p.start}`
+            url += `&end=${p.end}`
+
+            const res = await this.$axios.get(url).then(function (resp) {
+                return resp.data
+            }).catch(function (thrown) {
+                console.log('Request canceled', thrown.message);
+            });
+            return res
+        },
     }
 }
 export default priceStore

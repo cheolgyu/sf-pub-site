@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import StockIndex from '../views/stock/index.vue'
 import StockId from '../views/stock/id.vue'
 import StockIndexBound from '../views/stock/bound/index.vue'
-import StockIndexDayTrading from '../views/stock/day_traiding/index.vue'
+import StockIndexDayTrading from '../views/stock/day_trading/index.vue'
 import GameBotView from '../views/GameBotView.vue'
 
 const routes = [
@@ -15,23 +15,14 @@ const routes = [
   {
     path: '/stock',
     name: 'Stock',
-    component: StockIndex
+    component: StockIndex,
+    children: [
+      { path: 'bound', component: StockIndexBound },
+      { path: 'day_trading', component: StockIndexDayTrading },
+      { path: 'detail/:id', component: StockId },
+    ]
   },
-  {
-    path: '/stock/:id',
-    name: 'StockId',
-    component: StockId
-  },
-  {
-    path: '/stock/bound',
-    name: 'bound',
-    component: StockIndexBound
-  },
-  {
-    path: '/stock/day_trading',
-    name: 'StockId',
-    component: StockIndexDayTrading
-  },
+
   {
     path: '/gamebot',
     name: 'GameBot',

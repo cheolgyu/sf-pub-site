@@ -1,10 +1,7 @@
 <template>
-  <div id="stock_view">
+  <div id="stock_bound_view">
     <h1>반등</h1>
     <hr />
-    <h3>
-      {{ $store.state.priceStore.info }}
-    </h3>
 
     <div class="grid_market_area">
       <br />
