@@ -78,9 +78,9 @@ export default {
     async fetchData() {
       var now = new Date(); // 현재 날짜 및 시간
       var yesterday = new Date(now.setDate(now.getDate() - 3)); // 어제
-
+      console.log(now, yesterday);
       this.param.start = this.getDateFmt(yesterday);
-      this.param.end = this.getDateFmt(now);
+      this.param.end = this.getDateFmt(new Date());
       this.param.market = "KOSPI";
       const data = await this.$store.dispatch(
         "priceStore/geDayTrading",
