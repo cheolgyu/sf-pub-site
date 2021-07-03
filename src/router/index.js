@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-import StockIndex from '../views/stock/index.vue'
-import StockId from '../views/stock/id.vue'
-import StockIndexBound from '../views/stock/bound/index.vue'
-import StockIndexDayTrading from '../views/stock/day_trading/index.vue'
+import Stock from '../views/stock/Stock.vue'
+import StockHome from '../views/stock/StockHome.vue'
+import StockDetail from '../views/stock/StockDetail.vue'
+import StockBound from '../views/stock/StockBound.vue'
+import StockDayTrading from '../views/stock/StockDayTrading.vue'
 import GameBotView from '../views/GameBotView.vue'
 
 const routes = [
@@ -14,12 +15,13 @@ const routes = [
   },
   {
     path: '/stock',
-    name: 'Stock',
-    component: StockIndex,
+    name: 'Stock/:id',
+    component: Stock,
     children: [
-      { path: 'bound', component: StockIndexBound },
-      { path: 'day_trading', component: StockIndexDayTrading },
-      { path: 'detail/:id', component: StockId },
+      { path: '', component: StockHome },
+      { path: 'bound', component: StockBound },
+      { path: 'day_trading', component: StockDayTrading },
+      { path: ':id', component: StockDetail },
     ]
   },
 

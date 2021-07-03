@@ -1,5 +1,5 @@
 <template>
-  <div id="stock_bound_view">
+  <div id="stock_bound">
     <h1>반등</h1>
     <hr />
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="stock_day_trading_view">
+  <div id="stock_day_trading">
     <h1>단타</h1>
     <hr />
     <GridDayTrading />

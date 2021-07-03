@@ -1,7 +1,20 @@
-$table_price_color : #000000;
-$table_date_color : #2a2a2a;
+$table_price_color: #000000;
+$table_date_color: #2a2a2a;
 
-#stock_view {
+#stock {
+    #stock_nav {
+        padding: 30px;
+
+        a {
+            font-weight: bold;
+            color: #d3d3d4;
+
+            &.router-link-active {
+                color: #b94242;
+            }
+        }
+    }
+
     font-size: 12px;
     width: 10 0%;
     margin: auto;
