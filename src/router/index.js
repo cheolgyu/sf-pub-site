@@ -21,7 +21,7 @@ const routes = [
       { path: '', component: StockHome },
       { path: 'bound', component: StockBound },
       { path: 'day_trading', component: StockDayTrading },
-      { path: ':id', component: StockDetail },
+      { path: ':id', component: StockDetail ,name:"stock_id" },
     ]
   },
 

@@ -110,9 +110,7 @@ const priceStore = {
             return res.data
         }, async geDayTrading({ commit }, p) {
             var url = "day_trading?"
-            url += `&market=${p.market}`
-            url += `&start=${p.start}`
-            url += `&end=${p.end}`
+            url += `&market=${p.market.join()}`
 
             const res = await this.$axios.get(url).then(function (resp) {
                 return resp.data
