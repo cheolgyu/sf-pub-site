@@ -4,6 +4,7 @@ const priceStore = {
         star: [],//JSON.parse(localStorage.getItem("star")),
         info: "",
         chart: new Map(),
+        chartline: new Map(),
         company: new Map(),
     }),
     mutations: {
@@ -41,6 +42,13 @@ const priceStore = {
             map_page.set(payload.data.page, payload.data.data)
             state.chart.set(payload.code, map_page)
 
+        },
+        set_detail_chartline(state, payload) {
+            var abc = new Object()
+            payload.data.data.forEach(element => {
+                Object.assign(abc, element);
+            });
+            state.chartline.set(payload.code, abc)
         },
         set_detail_company(state, payload) {
             state.company.set(payload.code, payload.data)
@@ -91,6 +99,26 @@ const priceStore = {
                     }
                 }
                 commit("set_detail_chart", res)
+                return res
+            })
+            return res
+        },
+
+        async getDetailChartLine({ commit }, p) {
+            var url = `detail/chartline/${p.code}`
+            const res = await this.$axios.get(url).then(function (resp) {
+                // var d = JSON.parse(resp.data) ;
+                // console.log(d.data )
+                // d = JSON.parse(d.data)
+                    
+                var res = {
+                    code: p.code,
+                    data: {
+                        page: p.page,
+                        data: JSON.parse(resp.data)
+                    }
+                }
+               commit("set_detail_chartline", res);
                 return res
             })
             return res

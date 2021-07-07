@@ -43,6 +43,7 @@ export default {
           page: this.page,
         };
         await this.$store.dispatch("priceStore/getDetailChart", p);
+        await this.$store.dispatch("priceStore/getDetailChartLine", p);
         this.set();
       }
     },
@@ -51,10 +52,19 @@ export default {
         .get(this.code)
         .get(this.page);
 
+      var data_line = this.$store.state.priceStore.chartline.get(this.code);
+      data["line"] = data_line;
       this.draw(data);
     },
 
     draw(inp) {
+      var test = [14400, 15600, 15950];
+      var test2 = [
+        { x: "2021-06-23", y: 14400 },
+        { x: "2021-06-29", y: 15600 },
+        { x: "2021-06-30", y: 15950 },
+      ];
+      console.log(inp);
       const data = {
         labels: [...inp.date],
         datasets: [
@@ -67,6 +77,7 @@ export default {
           },
           {
             label: "시가",
+            hidden: true,
             data: [...inp.op],
             fill: true,
             borderColor: "#00C853",
@@ -88,11 +99,52 @@ export default {
           },
         ],
       };
+
+      if (inp.line.low !== undefined) {
+        data.datasets.push({
+          hidden: true,
+          label: "line-저가",
+          data: [...inp.line.low],
+          fill: true,
+          borderColor: "#92affc",
+          tension: 0.1,
+        });
+      }
+      if (inp.line.high !== undefined) {
+        data.datasets.push({
+          hidden: true,
+          label: "line-고가",
+          data: [...inp.line.high],
+          fill: true,
+          borderColor: "#ff7d7d",
+          tension: 0.1,
+        });
+      }
+      if (inp.line.close !== undefined) {
+        data.datasets.push({
+          hidden: true,
+          label: "line-종가",
+          data: [...inp.line.close],
+          fill: true,
+          borderColor: "#fcf4ca",
+          tension: 0.1,
+        });
+      }
+      if (inp.line.open !== undefined) {
+        data.datasets.push({
+          hidden: true,
+          label: "line-시가",
+          data: [...inp.line.open],
+          fill: true,
+          borderColor: "#70ffab",
+          tension: 0.1,
+        });
+      }
       var config = {
         type: this.type,
         data: data,
         options: {
-         scales: scales,
+          scales: scales,
           //툴팁
           interaction: {
             mode: "index",
