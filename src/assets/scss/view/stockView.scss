@@ -14,6 +14,11 @@ $table_date_color: #2a2a2a;
             }
         }
     }
+    
+    a {
+        font-weight: bold;
+        color: #d3d3d4;
+    }   
 
     font-size: 12px;
     width: 10 0%;
@@ -31,7 +36,7 @@ $table_date_color: #2a2a2a;
         color: black;
     }
 
-    .grid_table_area {
+    table {
         .td_date {
             color: $table_date_color;
         }
@@ -51,18 +56,16 @@ $table_date_color: #2a2a2a;
             height: 100px;
         }
 
-        table {
-            border-collapse: collapse;
-            border: 2px solid rgb(200, 200, 200);
-            letter-spacing: 1px;
-            font-family: sans-serif;
-        }
+        // table {
+        //     border-collapse: collapse;
+        //     border: 2px solid rgb(200, 200, 200);
+        //     letter-spacing: 1px;
+        //     font-family: sans-serif;
+        // }
 
-        table {
-            width: 90%;
-            margin: auto;
-        }
-
+        width: 90%;
+        margin: auto;
+        
         td,
         th {
             border: 1px solid rgb(109, 108, 108);

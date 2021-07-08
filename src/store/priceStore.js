@@ -58,6 +58,12 @@ const priceStore = {
 
     ,
     actions: {
+        async getInfo({ commit }) {
+            var url = `info`
+            const res = await this.$axios.get(url).then(function (resp) {
+                commit("set_info", resp.data.info)
+            })
+        },
         async getPrice({ commit }, p) {
 
             var url = `price?page=${p.page}`
@@ -107,18 +113,26 @@ const priceStore = {
         async getDetailChartLine({ commit }, p) {
             var url = `detail/chartline/${p.code}`
             const res = await this.$axios.get(url).then(function (resp) {
-                // var d = JSON.parse(resp.data) ;
-                // console.log(d.data )
-                // d = JSON.parse(d.data)
-                    
+                var j
+                var err = false
+                try {
+                    j = JSON.parse(resp.data)
+                } catch (error) {
+                    err = error;
+                    console.log(err)
+                }
+
                 var res = {
                     code: p.code,
                     data: {
                         page: p.page,
-                        data: JSON.parse(resp.data)
+                        data: j
                     }
                 }
-               commit("set_detail_chartline", res);
+                if (!err) {
+                    commit("set_detail_chartline", res);
+                }
+
                 return res
             })
             return res
@@ -139,6 +153,7 @@ const priceStore = {
         }, async geDayTrading({ commit }, p) {
             var url = "day_trading?"
             url += `&market=${p.market.join()}`
+            url += `&rows=${p.rows}`
 
             const res = await this.$axios.get(url).then(function (resp) {
                 return resp.data

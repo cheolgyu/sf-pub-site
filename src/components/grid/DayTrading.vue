@@ -5,14 +5,20 @@
       <thead>
         <tr>
           <th>이름</th>
+          <th>평균</th>
+          <th>표준편차</th>
           <th>네이버 이동</th>
         </tr>
       </thead>
       <tr></tr>
       <tr v-for="item in items" :key="item">
-        <td> 
-           <router-link :to="{ name: 'stock_id', params: { id: item.code  }}">{{ item.name }}</router-link>
-          </td>
+        <td>
+          <router-link :to="{ name: 'stock_id', params: { id: item.code } }">{{
+            item.name
+          }}</router-link>
+        </td>
+        <td>{{ item.avg }}</td>
+        <td>{{ item.std }}</td>
         <td><a target="_blank" :href="naver_link(item.code)"> 이동 </a></td>
       </tr>
     </table>
@@ -23,7 +29,7 @@ import GridTable from "@/components/grid/table/Table.vue";
 import CheckBoxMarket from "@/components/grid/table/CheckBoxMarket.vue";
 
 export default {
-  components: { GridTable,CheckBoxMarket },
+  components: { GridTable, CheckBoxMarket },
   watch: {
     "param.market": {
       handler() {
@@ -39,7 +45,8 @@ export default {
       items: [],
       param: {
         market: ["KOSPI", "KOSDAQ", "KONEX"],
-        sort: "std",
+        rows: 50,
+        sort: "avg",
         desc: true,
       },
     };

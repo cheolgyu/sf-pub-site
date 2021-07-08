@@ -1,9 +1,14 @@
 <template>
   <hr />
-  <h3>{{ title() }}</h3>
+  <h3>{{ title() }} </h3>
+  <p>  <a target="_blank" :href="naver_link(company_code.code)"> 네이버 이동 </a>  </p>
+  <br />
+  <br />
   <CompanyDetail :data="company_detail" v-if="ready.company" />
   <br />
+  <br />
   <CompanyState :data="company_state" v-if="ready.company" />
+  <br />
   <br />
   <details open v-if="ready.chart">
     <summary>그래프</summary>
@@ -49,6 +54,9 @@ export default {
     title() {
       var aa = this.company_code.name + "(" + this.company_code.code + ")";
       return aa;
+    },
+    naver_link(code) {
+      return "https://finance.naver.com/item/main.nhn?code=" + code;
     },
     setData(company) {
       this.cmp = company;

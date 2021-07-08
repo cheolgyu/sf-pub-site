@@ -14,6 +14,19 @@ export default {
   data() {
     return {};
   },
-  setup() {},
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.fetchData();
+      },
+      { immediate: true }
+    );
+  },
+  methods: {
+    async fetchData() {
+      const data = await this.$store.dispatch("priceStore/getInfo");
+    },
+  },
 };
 </script>
