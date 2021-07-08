@@ -6,21 +6,21 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "deploy ec2",
+            "label": "1. deploy",
             "type": "shell",
             "dependsOrder": "sequence",
             "dependsOn": [
-                "build",
-                "deploy"
+                "1-1. build yarn",
+                "1-2. deploy scp"
             ]
         },
         {
-            "label": "build",
+            "label": "1-1. build yarn",
             "type": "shell",
             "command": "yarn run build",
         },
         {
-            "label": "deploy",
+            "label": "1-2. deploy scp",
             "type": "shell",
             "command": "scp -i ../stock/highserpot_stock.pem -r ./dist ec2-user@3.37.161.89:~/stock/caddy/site",
         },
