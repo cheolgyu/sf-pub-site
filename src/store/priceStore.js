@@ -161,6 +161,19 @@ const priceStore = {
                 console.log('Request canceled', thrown.message);
             });
             return res
+        },async GetMonthlyPeek({ commit }, p) {
+            var url = "monthly_peek?"
+            url += `&market=${p.market.join()}`
+            url += `&rows=${p.rows}`
+            url += `&sort=${p.sort}`
+            url += `&desc=${p.desc}`
+
+            const res = await this.$axios.get(url).then(function (resp) {
+                return resp.data
+            }).catch(function (thrown) {
+                console.log('Request canceled', thrown.message);
+            });
+            return res
         },
     }
 }

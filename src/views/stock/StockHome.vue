@@ -9,11 +9,15 @@
         <p>단타</p>
        3 일 동안 종목의 고저차이의 퍼센트로 평균을 내서 나열합니다.
       </div>
+      <div>
+        <p>피크 월</p>
+       특정월에 거래량이 몰리는 종목입니다.
+      </div>
     </div>
   </div>
 </template>
 <script>
-export default {
+export default {  
   components: {},
   data() {
     return {};

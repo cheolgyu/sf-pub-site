@@ -1,7 +1,12 @@
 <template>
   <hr />
-  <h3>{{ title() }} </h3>
-  <p>  <a target="_blank" :href="naver_link(company_code.code)"> 네이버 이동 </a>  </p>
+  <h3>{{ title() }}</h3>
+  <p>
+    <a target="_blank" :href="naver_link(company_code.code)"> 네이버 이동 </a>
+  </p>
+  <br />
+  <br />
+  <ChartMonthlyPeek :data="peek" v-if="ready.company" />
   <br />
   <br />
   <CompanyDetail :data="company_detail" v-if="ready.company" />
@@ -18,11 +23,12 @@
 <script>
 /*eslint no-unused-vars: "error"*/
 import ChartLine from "@/components/chart/Line.vue";
+import ChartMonthlyPeek from "@/components/chart/MonthlyPeek.vue";
 import CompanyDetail from "@/components/company/detail.vue";
 import CompanyState from "@/components/company/state.vue";
 
 export default {
-  components: { ChartLine, CompanyDetail, CompanyState },
+  components: { ChartLine, ChartMonthlyPeek, CompanyDetail, CompanyState },
   data() {
     return {
       param: { code: "", page: 1 },
@@ -33,6 +39,7 @@ export default {
       company_code: {},
       company_detail: {},
       company_state: {},
+      peek: {},
 
       ready: {
         company: false,
@@ -69,13 +76,14 @@ export default {
         "priceStore/getDetailCompany",
         this.param
       );
-      
+
       if (data != null) {
         this.company_code = data.c;
         if (data.d !== undefined) {
           this.company_detail = data.d;
           this.company_detail.name = data.c.name;
           this.company_state = data.s;
+          this.peek = data.peek;
           this.ready.company = true;
         }
       }
