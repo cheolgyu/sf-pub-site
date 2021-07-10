@@ -1,3 +1,5 @@
+import { stockApi } from '@/api/stock.js'
+
 const priceStore = {
     namespaced: true,
     state: () => ({
@@ -59,120 +61,37 @@ const priceStore = {
     ,
     actions: {
         async getInfo({ commit }) {
-            var url = `info`
-            const res = await this.$axios.get(url).then(function (resp) {
-                commit("set_info", resp.data.info)
-            })
+            commit("set_info", await stockApi.getInfo())
         },
         async getPrice({ commit }, p) {
-
-            var url = `price?page=${p.page}`
-            url += `&rows=${p.rows}`
-            url += `&sort=${p.sort}`
-            url += `&desc=${p.desc}`
-            url += `&state=${p.state.join()}`
-            url += `&market=${p.market.join()}`
-            url += `&search=${p.search}`
-
-            const res = await this.$axios.get(url).then(function (resp) {
-                commit("set_info", resp.data.info)
-                return resp.data.price
-            })
-            return res
+            var res = await stockApi.getPrice(p)
+            commit("set_info", res.info)
+            return res.price
         },
         async getMarket({ commit }, p) {
-            var url = "market?"
-            url += `&sort=${p.sort}`
-            url += `&desc=${p.desc}`
-
-            const res = await this.$axios.get(url).then(function (resp) {
-                commit("set_info", resp.data.info)
-                return resp.data.market
-            })
-            return res
+            var res = await stockApi.getMarket(p)
+            commit("set_info", res.info)
+            return res.market
         },
         async getDetailChart({ commit }, p) {
-
-            var url = `detail/chart/${p.code}?page=${p.page}`
-
-            const res = await this.$axios.get(url).then(function (resp) {
-
-                var res = {
-                    code: p.code,
-                    data: {
-                        page: p.page,
-                        data: JSON.parse(resp.data)
-                    }
-                }
-                commit("set_detail_chart", res)
-                return res
-            })
+            var res = await stockApi.getDetailChart(p)
+            commit("set_detail_chart", res)
             return res
         },
-
         async getDetailChartLine({ commit }, p) {
-            var url = `detail/chartline/${p.code}`
-            const res = await this.$axios.get(url).then(function (resp) {
-                var j
-                var err = false
-                try {
-                    j = JSON.parse(resp.data)
-                } catch (error) {
-                    err = error;
-                    console.log(err)
-                }
-
-                var res = {
-                    code: p.code,
-                    data: {
-                        page: p.page,
-                        data: j
-                    }
-                }
-                if (!err) {
-                    commit("set_detail_chartline", res);
-                }
-
-                return res
-            })
+            var res = await stockApi.getDetailChartLine(p)
+            commit("set_detail_chartline", res)
             return res
         },
         async getDetailCompany({ commit }, p) {
-
-            var url = `detail/company/${p.code}`
-
-            const res = await this.$axios.get(url).then(function (resp) {
-                var res = {
-                    code: p.code,
-                    data: JSON.parse(resp.data)
-                }
-                //commit("set_detail_company", res)
-                return res
-            })
-            return res.data
-        }, async geDayTrading({ commit }, p) {
-            var url = "day_trading?"
-            url += `&market=${p.market.join()}`
-            url += `&rows=${p.rows}`
-
-            const res = await this.$axios.get(url).then(function (resp) {
-                return resp.data
-            }).catch(function (thrown) {
-                console.log('Request canceled', thrown.message);
-            });
+            var res = await stockApi.getDetailCompany(p)
             return res
-        },async GetMonthlyPeek({ commit }, p) {
-            var url = "monthly_peek?"
-            url += `&market=${p.market.join()}`
-            url += `&rows=${p.rows}`
-            url += `&sort=${p.sort}`
-            url += `&desc=${p.desc}`
-
-            const res = await this.$axios.get(url).then(function (resp) {
-                return resp.data
-            }).catch(function (thrown) {
-                console.log('Request canceled', thrown.message);
-            });
+        },
+        async geDayTrading({ commit }, p) {
+            var res = await stockApi.geDayTrading(p)
+            return res
+        }, async GetMonthlyPeek({ commit }, p) {
+            var res = await stockApi.GetMonthlyPeek(p)
             return res
         },
     }

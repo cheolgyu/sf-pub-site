@@ -28,7 +28,9 @@ export default {
   },
   methods: {
     set() {
-      this.draw(this.data["list"]);
+      if (this.data != null && this.data["list"] !== undefined) {
+        this.draw(this.data["list"]);
+      }
     },
 
     draw(inp) {
