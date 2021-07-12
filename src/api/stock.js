@@ -62,7 +62,7 @@ class Api {
                 j = JSON.parse(resp.data)
             } catch (error) {
                 err = error;
-                console.log(err)
+                console.debug(err)
             }
 
             var res = {
@@ -84,13 +84,15 @@ class Api {
         var url = `detail/company/${p.code}`
 
         const res = await axios.get(url).then(function (resp) {
-            var res = {
-                code: p.code,
-                data: JSON.parse(resp.data)
-            }
-            return res
+            return resp.data
         })
-        return res.data
+        var json_res  = null ;
+        try {
+            json_res= JSON.parse(res)
+        } catch (error) {
+            console.debug(error)
+        }   
+        return json_res
     }
     async geDayTrading(p) {
         var url = "day_trading?"

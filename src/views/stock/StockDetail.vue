@@ -2,7 +2,13 @@
   <hr />
   <h3>{{ title() }}</h3>
   <p>
-    <a target="_blank" :href="naver_link(company_code.code)"> 네이버 이동 </a>
+    <a
+      target="_blank"
+      :href="naver_link(company_code.code)"
+      v-if="ready.company"
+    >
+      네이버 이동
+    </a>
   </p>
   <br />
   <br />
@@ -17,7 +23,7 @@
   <br />
   <details open v-if="ready.chart">
     <summary>그래프</summary>
-    <ChartLine />
+    <ChartLine :is_ready="ready.chart" />
   </details>
 </template>
 <script>
@@ -43,7 +49,7 @@ export default {
 
       ready: {
         company: false,
-        chart: true,
+        chart: false,
       },
     };
   },
@@ -59,6 +65,9 @@ export default {
   computed: {},
   methods: {
     title() {
+      if (this.company_code.code === undefined) {
+        return "찾을수 없습니다.";
+      }
       var aa = this.company_code.name + "(" + this.company_code.code + ")";
       return aa;
     },

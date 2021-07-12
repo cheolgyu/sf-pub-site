@@ -12,7 +12,9 @@ import chart from "@/plugins/vue-chart.js";
 */
 
 export default {
-  props: {},
+  props: {
+    is_ready: Boolean,
+  },
   data() {
     return {
       myChart: null,
@@ -44,8 +46,12 @@ export default {
         .get(this.page);
 
       var data_line = this.$store.state.priceStore.chartline.get(this.code);
-      data["line"] = data_line;
-      this.draw(data);
+      if (data_line != null) {
+        data["line"] = data_line;
+      }
+      if (data.cp != null) {
+        this.draw(data);
+      }
     },
 
     draw(inp) {
@@ -156,6 +162,7 @@ export default {
         },
       };
       this.myChart = chart(this.$refs.myDiv, config);
+      this.props.is_ready = true;
       //this.myChart.update();
     },
   },

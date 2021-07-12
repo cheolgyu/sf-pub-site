@@ -46,11 +46,15 @@ const priceStore = {
 
         },
         set_detail_chartline(state, payload) {
-            var abc = new Object()
-            payload.data.data.forEach(element => {
-                Object.assign(abc, element);
-            });
-            state.chartline.set(payload.code, abc)
+
+            if (undefined !== payload) {
+                var abc = new Object()
+                payload.data.data.forEach(element => {
+                    Object.assign(abc, element);
+                });
+                state.chartline.set(payload.code, abc)
+            }
+
         },
         set_detail_company(state, payload) {
             state.company.set(payload.code, payload.data)
