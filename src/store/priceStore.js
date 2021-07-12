@@ -94,10 +94,15 @@ const priceStore = {
         async geDayTrading({ commit }, p) {
             var res = await stockApi.geDayTrading(p)
             return res
-        }, async GetMonthlyPeek({ commit }, p) {
+        }, 
+        async GetMonthlyPeek({ commit }, p) {
             var res = await stockApi.GetMonthlyPeek(p)
             return res
         },
+        async getPriceBound({ commit }, p) {
+            var res = await stockApi.getPriceBound(p)
+            return res
+        }, 
     }
 }
 export default priceStore

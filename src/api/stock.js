@@ -120,6 +120,18 @@ class Api {
         });
         return res
     }
+    async getPriceBound(p) {
+        var url = `price/bound/${p.code}?page=${p.page}`
+        url += `&rows=${p.rows}`
+        url += `&sort=${p.sort}`
+        url += `&desc=${p.desc}`
+        url += `&g_type=${p.g_type}`
+
+        const res = await axios.get(url).then(function (resp) {
+            return resp.data
+        })
+        return res
+    }
 }
 
 

@@ -21,6 +21,9 @@
   <CompanyState :data="company_state" v-if="ready.company" />
   <br />
   <br />
+  <PriceBound  />
+  <br />
+  <br />
   <details open v-if="ready.chart">
     <summary>그래프</summary>
     <ChartLine :is_ready="ready.chart" />
@@ -32,9 +35,16 @@ import ChartLine from "@/components/chart/Line.vue";
 import ChartMonthlyPeek from "@/components/chart/MonthlyPeek.vue";
 import CompanyDetail from "@/components/company/detail.vue";
 import CompanyState from "@/components/company/state.vue";
+import PriceBound from "@/components/price/bound.vue";
 
 export default {
-  components: { ChartLine, ChartMonthlyPeek, CompanyDetail, CompanyState },
+  components: {
+    ChartLine,
+    ChartMonthlyPeek,
+    CompanyDetail,
+    CompanyState,
+    PriceBound,
+  },
   data() {
     return {
       param: { code: "", page: 1 },
