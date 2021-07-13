@@ -98,6 +98,8 @@ class Api {
         var url = "day_trading?"
         url += `&market=${p.market.join()}`
         url += `&rows=${p.rows}`
+        url += `&sort=${p.sort}`
+        url += `&desc=${p.desc}`
 
         const res = await axios.get(url).then(function (resp) {
             return resp.data

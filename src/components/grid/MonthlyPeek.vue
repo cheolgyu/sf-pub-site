@@ -85,7 +85,6 @@ export default {
       }
     },
     sort(item){
-      console.log("sort",item)
       this.param.desc =  !this.param.desc
       this.param.sort = item;
       this.fetchData();

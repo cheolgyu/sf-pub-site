@@ -1,6 +1,6 @@
 <template>
   <div id="stock_day_trading">
-    <h1>단타</h1>
+    <h1>단타 (고가-저가의 퍼센트)</h1>
     <hr />
     <GridDayTrading />
   </div>
