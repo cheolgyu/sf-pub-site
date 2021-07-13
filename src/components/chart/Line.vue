@@ -162,7 +162,7 @@ export default {
         },
       };
       this.myChart = chart(this.$refs.myDiv, config);
-      this.props.is_ready = true;
+      this.$emit("update:is_ready", true);
       //this.myChart.update();
     },
   },

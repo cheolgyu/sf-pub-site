@@ -1,5 +1,5 @@
 <template>
-  <details open>
+  <details open v-show="!loading">
     <summary>반등 정보</summary>
     <RadioGType v-model:chked="param.g_type" />
     <table>
@@ -110,8 +110,9 @@ export default {
       if (data != null) {
         this.list = data;
         this.tb.full_count = data[0].full_count;
+        this.loading = false;
       }
-      this.loading = false;
+      
     },
   },
 };

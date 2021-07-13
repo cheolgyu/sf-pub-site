@@ -24,9 +24,9 @@
   <PriceBound  />
   <br />
   <br />
-  <details open v-if="ready.chart">
+  <details open v-show="ready.chart" >
     <summary>그래프</summary>
-    <ChartLine :is_ready="ready.chart" />
+    <ChartLine v-model:is_ready="ready.chart"  />
   </details>
 </template>
 <script>
