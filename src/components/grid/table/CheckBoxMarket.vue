@@ -1,16 +1,16 @@
 <template>
   <p>
-    <template v-for="item in market" :key="item.id">
+    <template v-for="item in $store.state.market_list" :key="item.id">
       <input
         type="checkbox"
         @change="change"
-        v-model="checkedValues"
-        :id="'CheckBoxMarket_' + item.id"
+        v-model="checked_values"
+        :id="'CheckBoxMarket_' + item.code"
         :value="item.id"
         checked
       />
-      <label :for="'CheckBoxMarket_' + item.id">
-        {{ item.nm }}
+      <label :for="'CheckBoxMarket_' + item.code">
+        {{ item.name }}
       </label>
     </template>
   </p>
@@ -20,34 +20,25 @@ export default {
   props: {
     chked: Array,
   },
-  watch: {},
   data() {
-    return {
-      checkedValues: ["KOSPI", "KOSDAQ", "KONEX"],
-      market: [
-        {
-          id: "KOSPI",
-          nm: "  코스피  ",
-        },
-        {
-          id: "KOSDAQ",
-          nm: "  코스닥  ",
-        },
-        {
-          id: "KONEX",
-          nm: "  코넥스  ",
-        },
-      ],
-    };
+    return {};
   },
-  created() {},
+  computed: {},
+  watch: {},
+  created() {
+    var checked_values = [];
+    this.$store.state.market_list.forEach((element) => {
+      checked_values.push(element.id);
+    });
+    this.checked_values = checked_values;
+  },
   methods: {
     change(event) {
-      if (this.checkedValues.length == 0 && !event.target.checked) {
+      if (this.checked_values.length == 0 && !event.target.checked) {
         event.target.checked = true;
-        this.checkedValues.push(event.target.value);
+        this.checked_values.push(event.target.value);
       } else {
-        this.$emit("update:chked", this.checkedValues);
+        this.$emit("update:chked", this.checked_values);
       }
     },
   },

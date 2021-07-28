@@ -5,6 +5,14 @@ url.set("getInfo", "info")
 
 
 class Api {
+    async getConfigMarketList() {
+        var url = "config/market_list"
+        const res = await axios.get(url).then(function (resp) {
+            return resp.data;
+        })
+        return res
+    }
+
     async getInfo() {
         var url = "info"
         const res = await axios.get(url).then(function (resp) {
@@ -38,7 +46,7 @@ class Api {
     }
 
     async getDetailChart(p) {
-        var url = `detail/chart/${p.code}?page=${p.page}`
+        var url = `company_chart/${p.code}?page=${p.page}`
 
         const res = await axios.get(url).then(function (resp) {
             var res = {
@@ -53,7 +61,7 @@ class Api {
         return res
     }
     async getDetailChartLine(p) {
-        var url = `detail/chartline/${p.code}`
+        var url = `company_chart_next/${p.code}`
 
         const res = await axios.get(url).then(function (resp) {
             var j
@@ -81,17 +89,17 @@ class Api {
         return res
     }
     async getDetailCompany(p) {
-        var url = `detail/company/${p.code}`
+        var url = `company/${p.code}`
 
         const res = await axios.get(url).then(function (resp) {
             return resp.data
         })
-        var json_res  = null ;
+        var json_res = null;
         try {
-            json_res= JSON.parse(res)
+            json_res = JSON.parse(res)
         } catch (error) {
             console.debug(error)
-        }   
+        }
         return json_res
     }
     async geDayTrading(p) {
@@ -100,6 +108,7 @@ class Api {
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
+        url += `&term=${p.term}`
 
         const res = await axios.get(url).then(function (resp) {
             return resp.data

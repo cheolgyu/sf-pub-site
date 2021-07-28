@@ -14,6 +14,9 @@ export default {
   data() {
     return {};
   },
+  async beforeCreate() {
+    const data = await this.$store.dispatch("set_market_list");
+  },
   created() {
     this.$watch(
       () => this.$route.params,

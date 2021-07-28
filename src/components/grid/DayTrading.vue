@@ -1,24 +1,32 @@
 <template>
   <div class="grid_table_area">
     <CheckBoxMarket v-model:chked="param.market" />
+    <label>기간 : </label>
+    <select v-model="param.term">
+      <option v-for="i in 10" :key="i" :value="i">{{ i }}일</option>
+    </select>
     <table>
       <thead>
         <tr>
           <th>이름</th>
-          <th class="clickable" @click="sort('std')">고가-저가의 표준편차</th>
-          <th class="clickable" @click="sort('avg')">고가-저가의 평균</th>
+          <th class="clickable" @click="sort('avg_o2c')">시가-종가 평균</th>
+          <th class="clickable" @click="sort('std_o2c')">시가-종가 표준편차</th>
+          <th class="clickable" @click="sort('avg_l2h')">고가-저가 평균</th>
+          <th class="clickable" @click="sort('std_l2h')">고가-저가 표준편차</th>
           <th>네이버 이동</th>
         </tr>
       </thead>
       <tr></tr>
       <tr v-for="item in items" :key="item">
-        <td class="txt-black" > 
+        <td class="txt-black">
           <router-link :to="{ name: 'stock_id', params: { id: item.code } }">{{
             item.name
           }}</router-link>
         </td>
-        <td>{{ item.std }}</td>
-        <td>{{ item.avg }}</td>
+        <td>{{ item.avg_o2c }}</td>
+        <td>{{ item.std_o2c }}</td>
+        <td>{{ item.avg_l2h }}</td>
+        <td>{{ item.std_l2h }}</td>
         <td><a target="_blank" :href="naver_link(item.code)"> 이동 </a></td>
       </tr>
     </table>
@@ -44,9 +52,10 @@ export default {
       object: "market",
       items: [],
       param: {
+        term: 3,
         market: ["KOSPI", "KOSDAQ", "KONEX"],
         rows: 50,
-        sort: "avg",
+        sort: "avg_o2c",
         desc: true,
       },
     };
@@ -64,8 +73,8 @@ export default {
     );
   },
   methods: {
-    sort(item){
-      this.param.desc =  !this.param.desc
+    sort(item) {
+      this.param.desc = !this.param.desc;
       this.param.sort = item;
       this.fetchData();
     },
