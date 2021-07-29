@@ -6,9 +6,11 @@
         <tr>
           <th>이름</th>
           <th>마켓</th>
-          <th class="clickable" @click="sort('peek')"> 피크 월</th>
+          <th class="clickable" @click="sort('peek')">피크 월</th>
           <th>피크 주변 월</th>
-          <th class="clickable" @click="sort('peek_percent')" >피크 월 거래량 %</th>
+          <th class="clickable" @click="sort('peek_percent')">
+            피크 월 거래량 %
+          </th>
           <th>네이버 이동</th>
         </tr>
       </thead>
@@ -48,7 +50,7 @@ export default {
       object: "market",
       items: [],
       param: {
-        market: ["KOSPI", "KOSDAQ", "KONEX"],
+        market: [],
         rows: 30,
         sort: "peek_percent",
         desc: true,
@@ -60,6 +62,12 @@ export default {
     this.$watch(
       () => this.$route.params,
       () => {
+        this.$store.dispatch("get_market_list").then((res) => {
+          res.forEach((element) => {
+            this.$data.param.market.push(element.id);
+          });
+        });
+
         this.fetchData();
       },
       // fetch the data when the view is created and the data is
@@ -84,11 +92,11 @@ export default {
         this.items = [];
       }
     },
-    sort(item){
-      this.param.desc =  !this.param.desc
+    sort(item) {
+      this.param.desc = !this.param.desc;
       this.param.sort = item;
       this.fetchData();
-    }
+    },
   },
   setup() {},
 };

@@ -53,7 +53,7 @@ export default {
       items: [],
       param: {
         term: 3,
-        market: ["KOSPI", "KOSDAQ", "KONEX"],
+        market: [],
         rows: 50,
         sort: "avg_o2c",
         desc: true,
@@ -65,6 +65,12 @@ export default {
     this.$watch(
       () => this.$route.params,
       () => {
+        this.$store.dispatch("get_market_list").then((res) => {
+          res.forEach((element) => {
+            this.$data.param.market.push(element.id);
+          });
+        });
+
         this.fetchData();
       },
       // fetch the data when the view is created and the data is
