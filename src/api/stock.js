@@ -130,12 +130,12 @@ class Api {
         });
         return res
     }
-    async getPriceBound(p) {
+    async getCompanyRebound(p) {
         var url = `company/${p.code}/rebound?page=${p.page}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
-        url += `&g_type=${p.g_type}`
+        url += `&price_type=${p.price_type}`
 
         const res = await axios.get(url).then(function (resp) {
             return resp.data

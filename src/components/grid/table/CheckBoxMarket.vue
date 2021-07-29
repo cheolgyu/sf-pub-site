@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     set_market() {
-      this.$store.dispatch("get_config", "market").then((res) => {
+      this.$store.dispatch("get_config", "market_type").then((res) => {
         this.market_list = res;
         res.forEach((element) => {
           this.checked_values.push(element.id);

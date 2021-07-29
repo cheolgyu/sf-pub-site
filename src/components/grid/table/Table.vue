@@ -5,6 +5,7 @@
         {{
           name
         }}
+        <hr/>
         <template v-for="(i, item) in p_show" :key="i">
           <button :disabled="p_show[item]" @click="click_p_type(item)">
             {{ p_text[item] }}

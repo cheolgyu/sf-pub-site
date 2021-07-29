@@ -21,12 +21,12 @@
   <CompanyState :data="company_state" v-if="ready.company" />
   <br />
   <br />
-  <PriceBound  />
+  <PriceBound />
   <br />
   <br />
-  <details open v-show="ready.chart" >
+  <details open v-show="ready.chart">
     <summary>그래프</summary>
-    <ChartLine v-model:is_ready="ready.chart"  />
+    <ChartLine v-model:is_ready="ready.chart" />
   </details>
 </template>
 <script>

@@ -100,8 +100,8 @@ const priceStore = {
             var res = await stockApi.GetMonthlyPeek(p)
             return res
         },
-        async getPriceBound({ commit }, p) {
-            var res = await stockApi.getPriceBound(p)
+        async getCompanyRebound({ commit }, p) {
+            var res = await stockApi.getCompanyRebound(p)
             return res
         },
     }

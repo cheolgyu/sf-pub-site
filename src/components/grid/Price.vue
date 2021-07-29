@@ -100,7 +100,7 @@ export default {
     this.$watch(
       () => this.$route.params,
       () => {
-        this.$store.dispatch("get_config", "market").then((res) => {
+        this.$store.dispatch("get_config", "market_type").then((res) => {
           res.forEach((element) => {
             this.$data.param.market.push(element.id);
           });

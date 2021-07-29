@@ -1,5 +1,5 @@
 <template>
-  <details >
+  <details open >
     <summary>회사-상태정보</summary>
     <table>
       <tr>

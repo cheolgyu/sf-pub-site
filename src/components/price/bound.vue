@@ -1,7 +1,8 @@
 <template>
-  <details open v-show="!loading">
+  <!-- <details open v-show="!loading"> -->
+  <details open>
     <summary>반등 정보</summary>
-    <RadioGType v-model:chked="param.g_type" />
+    <RadioPriceType v-model:chked="param.price_type" />
     <table>
       <thead>
         <tr>
@@ -40,12 +41,12 @@
 <script>
 /*eslint no-unused-vars: "error"*/
 import Paging from "@/components/grid/table/Paging.vue";
-import RadioGType from "@/components/price/RadioGType.vue";
+import RadioPriceType from "@/components/price/RadioPriceType.vue";
 
 export default {
   components: {
     Paging,
-    RadioGType,
+    RadioPriceType,
   },
   props: {},
   data() {
@@ -54,7 +55,14 @@ export default {
       tb: {
         full_count: 0,
       },
-      param: { code: "", page: 1, rows: 10, sort: "", desc: true, g_type: "" },
+      param: {
+        code: "",
+        page: 1,
+        rows: 10,
+        sort: "",
+        desc: true,
+        price_type: "",
+      },
       loading: false,
     };
   },
@@ -62,6 +70,14 @@ export default {
     this.$watch(
       () => this.$route.params,
       () => {
+        this.$store.dispatch("get_config", "price_type").then((res) => {
+          res.forEach((element) => {
+            if (element.code == "close") {
+              this.param.price_type = element.id;
+            }
+          });
+        });
+
         this.fetchData();
       },
       { immediate: true }
@@ -80,7 +96,7 @@ export default {
       },
       deep: true,
     },
-    "param.g_type": {
+    "param.price_type": {
       handler() {
         this.default_page();
       },
@@ -103,7 +119,7 @@ export default {
       this.loading = true;
       this.param.code = this.$route.params.id;
       const data = await this.$store.dispatch(
-        "priceStore/getPriceBound",
+        "priceStore/getCompanyRebound",
         this.param
       );
 
@@ -112,7 +128,6 @@ export default {
         this.tb.full_count = data[0].full_count;
         this.loading = false;
       }
-      
     },
   },
 };

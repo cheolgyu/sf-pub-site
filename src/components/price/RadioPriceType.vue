@@ -5,47 +5,35 @@
         type="radio"
         @change="change"
         v-model="checkedValues"
-        name="aaa"
-        :id="'CheckBoxGType_' + item.id"
+        name="RadioBox_PriceType"
+        :id="'RadioBox_PriceType_' + item.id"
         :value="item.id"
-        :checked="checkedValues==item.id"
+        :checked="checkedValues == item.code"
       />
-      <label :for="'CheckBoxGType_' + item.id">
-        {{ item.nm }}
+      <label :for="'RadioBox_PriceType_' + item.id">
+        {{ item.name }}
       </label>
     </template>
   </p>
 </template>
 <script>
 export default {
-  props: {
-    chked: Array,
-  },
+  props: {},
   watch: {},
   data() {
     return {
       checkedValues: "close",
-      items: [
-        {
-          id: "close",
-          nm: "  종가  ",
-        },
-        {
-          id: "open",
-          nm: "  시가  ",
-        },
-        {
-          id: "low",
-          nm: "  저가  ",
-        },
-        {
-          id: "high",
-          nm: "  고가  ",
-        },
-      ],
+      items: [],
     };
   },
   created() {},
+  mounted() {
+    this.$store.dispatch("get_config", "price_type").then((res) => {
+      res.forEach((element) => {
+        this.items.push(element);
+      });
+    });
+  },
   methods: {
     change(event) {
       this.$emit("update:chked", event.target.value);
