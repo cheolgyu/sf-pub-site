@@ -3,13 +3,13 @@ import axios from '@/plugins/axios'
 var url = new Map();
 url.set("getInfo", "info")
 class Api {
-    async getConfigMarketList() {
-        var url = "config/market_list"
-        var market = await axios.get(url).then(function (resp) {
+    async getConfig() {
+        var url = "config"
+        var data = await axios.get(url).then(function (resp) {
             return resp.data;
         })
 
-        return market
+        return data
     }
 
     async getInfo() {
@@ -45,7 +45,7 @@ class Api {
     }
 
     async getDetailChart(p) {
-        var url = `company/chart/${p.code}?page=${p.page}`
+        var url = `company/${p.code}/chart?page=${p.page}`
 
         const res = await axios.get(url).then(function (resp) {
             var res = {
@@ -60,7 +60,7 @@ class Api {
         return res
     }
     async getDetailChartLine(p) {
-        var url = `company/chart/next/${p.code}`
+        var url = `company/${p.code}/chart/next`
 
         const res = await axios.get(url).then(function (resp) {
             var j
@@ -131,7 +131,7 @@ class Api {
         return res
     }
     async getPriceBound(p) {
-        var url = `company/rebound/${p.code}?page=${p.page}`
+        var url = `company/${p.code}/rebound?page=${p.page}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`

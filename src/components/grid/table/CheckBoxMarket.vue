@@ -1,9 +1,6 @@
 <template>
   <p>
-    <template
-      v-for="item in market_list"
-      :key="item.id"
-    >
+    <template v-for="item in market_list" :key="item.id">
       <input
         type="checkbox"
         @change="change"
@@ -39,7 +36,7 @@ export default {
   },
   methods: {
     set_market() {
-      this.$store.dispatch("get_market_list").then((res) => {
+      this.$store.dispatch("get_config", "market").then((res) => {
         this.market_list = res;
         res.forEach((element) => {
           this.checked_values.push(element.id);
