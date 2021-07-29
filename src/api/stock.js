@@ -45,7 +45,7 @@ class Api {
     }
 
     async getDetailChart(p) {
-        var url = `company_chart/${p.code}?page=${p.page}`
+        var url = `company/chart/${p.code}?page=${p.page}`
 
         const res = await axios.get(url).then(function (resp) {
             var res = {
@@ -60,7 +60,7 @@ class Api {
         return res
     }
     async getDetailChartLine(p) {
-        var url = `company_chart_next/${p.code}`
+        var url = `company/chart/next/${p.code}`
 
         const res = await axios.get(url).then(function (resp) {
             var j
@@ -131,7 +131,7 @@ class Api {
         return res
     }
     async getPriceBound(p) {
-        var url = `price/bound/${p.code}?page=${p.page}`
+        var url = `company/rebound/${p.code}?page=${p.page}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
