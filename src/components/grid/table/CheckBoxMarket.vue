@@ -1,6 +1,9 @@
 <template>
   <p>
-    <template v-for="item in $store.state.market_list" :key="item.id">
+    <template
+      v-for="item in market_list"
+      :key="item.id"
+    >
       <input
         type="checkbox"
         @change="change"
@@ -21,18 +24,28 @@ export default {
     chked: Array,
   },
   data() {
-    return {};
+    return {
+      market_list: [],
+      checked_values: [],
+    };
   },
   computed: {},
   watch: {},
+  mounted() {
+    //this.set_market();
+  },
   created() {
-    var checked_values = [];
-    this.$store.state.market_list.forEach((element) => {
-      checked_values.push(element.id);
-    });
-    this.checked_values = checked_values;
+    this.set_market();
   },
   methods: {
+    set_market() {
+      this.$store.dispatch("get_market_list").then((res) => {
+        this.market_list = res;
+        res.forEach((element) => {
+          this.checked_values.push(element.id);
+        });
+      });
+    },
     change(event) {
       if (this.checked_values.length == 0 && !event.target.checked) {
         event.target.checked = true;

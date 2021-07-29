@@ -9,14 +9,15 @@
 </template>
 <script>
 import StockNav from "./StockNav.vue";
+
 export default {
+  setup(props) {},
+
   components: { StockNav },
   data() {
     return {};
   },
-  async beforeCreate() {
-    const data = await this.$store.dispatch("set_market_list");
-  },
+  beforeCreate() {},
   created() {
     this.$watch(
       () => this.$route.params,

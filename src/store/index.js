@@ -13,9 +13,16 @@ export default createStore({
     }
   },
   actions: {
-    async set_market_list({ commit }) {
-      var res = await stockApi.getConfigMarketList()
-      commit("set_market_list", res)
+    get_market_list({ commit, state }) {
+      var res = [];
+      if (state.market_list.length == 0) {
+        res = stockApi.getConfigMarketList().then(res => {
+          commit("set_market_list", res)
+          return res
+        })
+      } else {
+        res = state.market_list
+      }
       return res
     },
   },

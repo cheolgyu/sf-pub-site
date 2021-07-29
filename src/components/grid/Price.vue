@@ -28,7 +28,6 @@ import CheckBoxMarket from "@/components/grid/table/CheckBoxMarket.vue";
 import CheckBoxState from "@/components/grid/table/CheckBoxState.vue";
 import InputSearch from "@/components/grid/table/InputSearch.vue";
 import Paging from "@/components/grid/table/Paging.vue";
-
 const default_page = 1;
 //const default_rows = 10;
 
@@ -84,7 +83,7 @@ export default {
         state: ["stop::false"],
         sort: "cp_y_percent",
         desc: true,
-        market: ["KOSPI", "KOSDAQ", "KONEX"],
+        market: [],
         search: "",
       },
       tb: {
@@ -95,11 +94,18 @@ export default {
       },
     };
   },
+  mounted() {},
   created() {
     // watch the params of the route to fetch the data again
     this.$watch(
       () => this.$route.params,
       () => {
+        this.$store.dispatch("get_market_list").then((res) => {
+          res.forEach((element) => {
+            this.$data.param.market.push(element.id);
+          });
+        });
+
         this.fetchData();
       },
       // fetch the data when the view is created and the data is
@@ -136,7 +142,7 @@ export default {
       this.tb.loading = false;
     },
   },
-  setup() {},
+  setup(props) {},
 };
 </script>
 

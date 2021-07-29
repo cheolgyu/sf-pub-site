@@ -65,17 +65,18 @@ const priceStore = {
     ,
     actions: {
         async getInfo({ commit }) {
-            commit("set_info", await stockApi.getInfo())
+            await stockApi.getInfo().then(res => {
+                commit("set_info", res)
+            })
         },
         async getPrice({ commit }, p) {
             var res = await stockApi.getPrice(p)
-            commit("set_info", res.info)
-            return res.price
+
+            return res
         },
         async getMarket({ commit }, p) {
             var res = await stockApi.getMarket(p)
-            commit("set_info", res.info)
-            return res.market
+            return res
         },
         async getDetailChart({ commit }, p) {
             var res = await stockApi.getDetailChart(p)
@@ -94,7 +95,7 @@ const priceStore = {
         async geDayTrading({ commit }, p) {
             var res = await stockApi.geDayTrading(p)
             return res
-        }, 
+        },
         async GetMonthlyPeek({ commit }, p) {
             var res = await stockApi.GetMonthlyPeek(p)
             return res
@@ -102,7 +103,7 @@ const priceStore = {
         async getPriceBound({ commit }, p) {
             var res = await stockApi.getPriceBound(p)
             return res
-        }, 
+        },
     }
 }
 export default priceStore

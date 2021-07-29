@@ -2,15 +2,14 @@ import axios from '@/plugins/axios'
 
 var url = new Map();
 url.set("getInfo", "info")
-
-
 class Api {
     async getConfigMarketList() {
         var url = "config/market_list"
-        const res = await axios.get(url).then(function (resp) {
+        var market = await axios.get(url).then(function (resp) {
             return resp.data;
         })
-        return res
+
+        return market
     }
 
     async getInfo() {
@@ -21,7 +20,7 @@ class Api {
         return res
     }
     async getPrice(p) {
-        var url = `price?page=${p.page}`
+        var url = `price/stock?page=${p.page}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
@@ -35,7 +34,7 @@ class Api {
         return res
     }
     async getMarket(p) {
-        var url = "market?"
+        var url = "price/market?"
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
 
