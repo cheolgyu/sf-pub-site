@@ -32,7 +32,7 @@ const priceStore = {
             this.commit("stock/update_price", { code: code, exist: exist })
 
         }, set_info(state, payload) {
-            var arr = payload[0].updated.split(".")
+            var arr = payload.split(".")
             arr[0].replace("T", "")
 
             state.info = arr[0].replace("T", " ")

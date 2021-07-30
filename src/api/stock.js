@@ -13,9 +13,9 @@ class Api {
     }
 
     async getInfo() {
-        var url = "info"
+        var url = "update_time"
         const res = await axios.get(url).then(function (resp) {
-            return resp.data.info;
+            return resp.data;
         })
         return res
     }
