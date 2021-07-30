@@ -45,6 +45,12 @@ export default {
       },
       deep: true,
     },
+    "param.term": {
+      handler() {
+        this.fetchData();
+      },
+      deep: true,
+    },
   },
   data() {
     return {
@@ -67,11 +73,11 @@ export default {
       () => {
         this.$store.dispatch("get_config", "market_type").then((res) => {
           res.forEach((element) => {
-            this.$data.param.market.push(element.id);
+            this.param.market.push(element.id);
           });
         });
 
-        this.fetchData();
+        //this.fetchData();
       },
       // fetch the data when the view is created and the data is
       // already being observed

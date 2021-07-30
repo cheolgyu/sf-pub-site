@@ -102,7 +102,7 @@ class Api {
         return json_res
     }
     async geDayTrading(p) {
-        var url = "day_trading?"
+        var url = "project/day_trading?"
         url += `&market=${p.market.join()}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
@@ -117,7 +117,7 @@ class Api {
         return res
     }
     async GetMonthlyPeek(p) {
-        var url = "monthly_peek?"
+        var url = "project/monthly_peek?"
         url += `&market=${p.market.join()}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`

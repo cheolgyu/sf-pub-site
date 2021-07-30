@@ -21,9 +21,9 @@
             item.name
           }}</router-link>
         </td>
-        <td>{{ item.market }}</td>
+        <td>{{ item.market_type_name  }}</td>
         <td>{{ item.peek }}</td>
-        <td>{{ item.peek_list }}</td>
+        <td>{{ item.peek_range }}</td>
         <td>{{ item.peek_percent }}</td>
         <td><a target="_blank" :href="naver_link(item.code)"> 이동 </a></td>
       </tr>
@@ -64,11 +64,11 @@ export default {
       () => {
         this.$store.dispatch("get_config", "market_type").then((res) => {
           res.forEach((element) => {
-            this.$data.param.market.push(element.id);
+            this.param.market.push(element.id);
           });
         });
 
-        this.fetchData();
+        //this.fetchData();
       },
       // fetch the data when the view is created and the data is
       // already being observed
