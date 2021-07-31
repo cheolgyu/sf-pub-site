@@ -2,7 +2,9 @@
   <tr>
     <td class="tl">
       <b>
-        <a :href="to" class="a_color">{{ item.name }}</a>
+        <router-link :to="{ name: 'stock_id', params: { id: item.code } }">{{
+          item.name
+        }}</router-link>
       </b>
     </td>
     <td class="tl">{{ item.market }}</td>
@@ -85,9 +87,6 @@ export default {
   },
   setup() {},
   computed: {
-    to() {
-      return "/stock/" + this.item.code;
-    },
     link() {
       if (this.object == "price") {
         return this.price_link;
