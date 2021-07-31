@@ -3,29 +3,28 @@ import { createStore } from 'vuex'
 import priceStore from './priceStore.js'
 import { stockApi } from '@/api/stock.js'
 
+var meta_config = new Map()
+
+async function application_config(params) {
+  var res = stockApi.getConfig()
+  res.forEach(element => {
+    if (!meta_config.has(element.upper_code)) {
+      meta_config.set(element.upper_code, new Array())
+    }
+    meta_config.get(element.upper_code).push(element);
+  });
+
+}
+application_config();
+
 export default createStore({
   state: {
-    config: new Map(),
+    config: meta_config,
   },
   mutations: {
-    set_config(state, payload) {
-      state.config = new Map();
-
-      payload.forEach(element => {
-        if (!state.config.has(element.upper_code)) {
-          state.config.set(element.upper_code, new Array())
-        }
-        state.config.get(element.upper_code).push(element);
-      });
-    }
   },
   actions: {
     async get_config({ commit, state }, config_name) {
-      if (!state.config.has(config_name)) {
-        await stockApi.getConfig().then(res => {
-          commit("set_config", res)
-        })
-      }
       return state.config.get(config_name)
     },
   },

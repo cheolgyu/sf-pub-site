@@ -1,26 +1,37 @@
 import axios from '@/plugins/axios'
 
-var url = new Map();
-url.set("getInfo", "info")
 class Api {
-    async getConfig() {
-        var url = "config"
-        var data = await axios.get(url).then(function (resp) {
-            return resp.data;
-        })
+    getConfig() {
+        var aysnc = false
+        var host = process.env.VUE_APP_BACKEND_URL
+        var url = "/config"
+        var oReq = new XMLHttpRequest();
+        var res=""
+        
+        oReq.onload = function (e) {
+            // status는 response 상태 코드를 반환 : 200 => 정상 응답
+            if (oReq.status === 200) {
+                res = JSON.parse(oReq.responseText);
+            } else {
+                console.error(' api getConfig Error!');
+            }
+        };
+        oReq.open("GET", host + url, aysnc);
+        oReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        oReq.send();
 
-        return data
+        return res;
     }
 
     async getInfo() {
-        var url = "update_time"
+        var url = "/update_time"
         const res = await axios.get(url).then(function (resp) {
             return resp.data;
         })
         return res
     }
     async getPrice(p) {
-        var url = `price/stock?page=${p.page}`
+        var url = `/price/stock?page=${p.page}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
@@ -34,7 +45,7 @@ class Api {
         return res
     }
     async getMarket(p) {
-        var url = "price/market?"
+        var url = "/price/market?"
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
 
@@ -45,7 +56,7 @@ class Api {
     }
 
     async getDetailChart(p) {
-        var url = `company/${p.code}/chart?page=${p.page}`
+        var url = `/company/${p.code}/chart?page=${p.page}`
 
         const res = await axios.get(url).then(function (resp) {
             var res = {
@@ -60,7 +71,7 @@ class Api {
         return res
     }
     async getDetailChartLine(p) {
-        var url = `company/${p.code}/chart/next`
+        var url = `/company/${p.code}/chart/next`
 
         const res = await axios.get(url).then(function (resp) {
             var j
@@ -88,7 +99,7 @@ class Api {
         return res
     }
     async getDetailCompany(p) {
-        var url = `company/${p.code}`
+        var url = `/company/${p.code}`
 
         const res = await axios.get(url).then(function (resp) {
             return resp.data
@@ -102,7 +113,7 @@ class Api {
         return json_res
     }
     async geDayTrading(p) {
-        var url = "project/day_trading?"
+        var url = "/project/day_trading?"
         url += `&market=${p.market.join()}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
@@ -117,7 +128,7 @@ class Api {
         return res
     }
     async GetMonthlyPeek(p) {
-        var url = "project/monthly_peek?"
+        var url = "/project/monthly_peek?"
         url += `&market=${p.market.join()}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
@@ -131,7 +142,7 @@ class Api {
         return res
     }
     async getCompanyRebound(p) {
-        var url = `company/${p.code}/rebound?page=${p.page}`
+        var url = `/company/${p.code}/rebound?page=${p.page}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`

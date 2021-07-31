@@ -76,7 +76,6 @@ export default {
             this.param.market.push(element.id);
           });
         });
-
         //this.fetchData();
       },
       // fetch the data when the view is created and the data is
