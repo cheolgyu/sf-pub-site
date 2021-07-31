@@ -12,27 +12,21 @@ export default createStore({
       state.config = new Map();
 
       payload.forEach(element => {
-        if (undefined === state.config[element.upper_code]) {
-          state.config[element.upper_code] = new Array()
+        if (!state.config.has(element.upper_code)) {
+          state.config.set(element.upper_code, new Array())
         }
-        state.config[element.upper_code].push(element);
+        state.config.get(element.upper_code).push(element);
       });
-      return state.config
     }
   },
   actions: {
     async get_config({ commit, state }, config_name) {
-      console.debug("action get_config ========================----------------", config_name);
-      console.debug("action get_config ========================", state.config.size, state);
-      if (state.config.size == 0) {
+      if (!state.config.has(config_name)) {
         await stockApi.getConfig().then(res => {
           commit("set_config", res)
         })
       }
-
-      var res = state.config[config_name];
-      console.debug("action get_config ========================", res);
-      return res
+      return state.config.get(config_name)
     },
   },
   modules: {
