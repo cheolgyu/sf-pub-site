@@ -22,14 +22,17 @@ export default createStore({
   },
   actions: {
     async get_config({ commit, state }, config_name) {
-      var res = [];
+      console.debug("action get_config ========================----------------", config_name);
+      console.debug("action get_config ========================", state.config.size, state);
       if (state.config.size == 0) {
         await stockApi.getConfig().then(res => {
           commit("set_config", res)
         })
       }
 
-      return state.config[config_name]
+      var res = state.config[config_name];
+      console.debug("action get_config ========================", res);
+      return res
     },
   },
   modules: {

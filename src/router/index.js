@@ -17,7 +17,6 @@ const routes = [
   },
   {
     path: '/stock',
-    name: 'Stock/:id',
     component: Stock,
     children: [
       { path: '', component: StockHome },
@@ -36,7 +35,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes
 })
 

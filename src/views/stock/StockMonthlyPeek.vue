@@ -13,6 +13,5 @@ export default {
   data() {
     return {};
   },
-  setup() {},
 };
 </script>

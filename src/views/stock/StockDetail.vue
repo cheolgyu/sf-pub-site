@@ -67,10 +67,14 @@ export default {
     this.$watch(
       () => this.$route.params,
       () => {
-        this.fetchData();
+        // mounted 에서 하기. 뒤로가기 시 오류남.
+        //this.fetchData();
       },
       { immediate: true }
     );
+  },
+  mounted() {
+    this.fetchData();
   },
   computed: {},
   methods: {

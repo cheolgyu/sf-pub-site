@@ -21,7 +21,7 @@
             item.name
           }}</router-link>
         </td>
-        <td>{{ item.market_type_name  }}</td>
+        <td>{{ item.market_type_name }}</td>
         <td>{{ item.peek }}</td>
         <td>{{ item.peek_range }}</td>
         <td>{{ item.peek_percent }}</td>
@@ -67,8 +67,6 @@ export default {
             this.param.market.push(element.id);
           });
         });
-
-        //this.fetchData();
       },
       // fetch the data when the view is created and the data is
       // already being observed
@@ -98,6 +96,5 @@ export default {
       this.fetchData();
     },
   },
-  setup() {},
 };
 </script>

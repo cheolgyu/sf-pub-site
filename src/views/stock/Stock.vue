@@ -12,12 +12,11 @@ import StockNav from "./StockNav.vue";
 
 export default {
   setup(props) {},
-
+  beforeCreate() {},
   components: { StockNav },
   data() {
     return {};
   },
-  beforeCreate() {},
   created() {
     this.$watch(
       () => this.$route.params,
@@ -29,7 +28,9 @@ export default {
   },
   methods: {
     async fetchData() {
-      const data = await this.$store.dispatch("priceStore/getInfo");
+      await this.$store.dispatch("priceStore/getInfo");
+      await this.$store.dispatch("get_config", "market_type");
+      await this.$store.dispatch("get_config", "price_type");
     },
   },
 };
