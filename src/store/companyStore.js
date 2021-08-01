@@ -14,7 +14,14 @@ const companyStore = {
             state.chart.set(payload.code, map_page)
         },
         set_chart_next(state, payload) {
-            state.company.set(payload.code, payload.data)
+            
+            if (undefined !== payload) {
+                var abc = new Object()
+                payload.data.data.forEach(element => {
+                    Object.assign(abc, element);
+                });
+                state.chartline.set(payload.code, abc)
+            }
         }
     }
 

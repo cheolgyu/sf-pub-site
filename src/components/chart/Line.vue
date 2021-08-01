@@ -93,7 +93,7 @@ export default {
         if (inp.line.low !== undefined) {
           data.datasets.push({
             hidden: true,
-            label: "line-저가",
+            label: "next-저가",
             data: [...inp.line.low],
             fill: true,
             borderColor: "#92affc",
@@ -103,7 +103,7 @@ export default {
         if (inp.line.high !== undefined) {
           data.datasets.push({
             hidden: true,
-            label: "line-고가",
+            label: "next-고가",
             data: [...inp.line.high],
             fill: true,
             borderColor: "#ff7d7d",
@@ -113,7 +113,7 @@ export default {
         if (inp.line.close !== undefined) {
           data.datasets.push({
             hidden: true,
-            label: "line-종가",
+            label: "next-종가",
             data: [...inp.line.close],
             fill: true,
             borderColor: "#fcf4ca",
@@ -123,7 +123,7 @@ export default {
         if (inp.line.open !== undefined) {
           data.datasets.push({
             hidden: true,
-            label: "line-시가",
+            label: "next-시가",
             data: [...inp.line.open],
             fill: true,
             borderColor: "#70ffab",
