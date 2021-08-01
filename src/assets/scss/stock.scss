@@ -6,11 +6,11 @@ $price-colors: (
     "eq": black,
 );
 .txt-red {
-    color: map.get($price-colors, "up");
+    color: map.get($price-colors, "up") !important;
 }
 .txt-blue {
-    color: map.get($price-colors, "down");
+    color: map.get($price-colors, "down") !important;
 }
 .txt-black {
-    color: map.get($price-colors, "eq");
+    color: map.get($price-colors, "eq") !important;
 }

@@ -59,7 +59,7 @@ export default {
         code: "",
         page: 1,
         rows: 10,
-        sort: "",
+        sort: "x1",
         desc: true,
         price_type: "",
       },
