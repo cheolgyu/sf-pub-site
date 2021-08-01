@@ -5,7 +5,7 @@ const priceStore = {
     state: () => ({
         star: [],//JSON.parse(localStorage.getItem("star")),
         info: "",
-        chart: new Map(),
+        
         chartline: new Map(),
         company: new Map(),
     }),
@@ -39,23 +39,6 @@ const priceStore = {
         }, set_market(state, payload) {
             state.market = payload
         },
-        set_detail_chart(state, payload) {
-            var map_page = new Map();
-            map_page.set(payload.data.page, payload.data.data)
-            state.chart.set(payload.code, map_page)
-
-        },
-        set_detail_chartline(state, payload) {
-
-            if (undefined !== payload) {
-                var abc = new Object()
-                payload.data.data.forEach(element => {
-                    Object.assign(abc, element);
-                });
-                state.chartline.set(payload.code, abc)
-            }
-
-        },
     }
 
     ,
@@ -74,12 +57,6 @@ const priceStore = {
             var res = await stockApi.getMarket(p)
             return res
         },
-        async getDetailChart({ commit }, p) {
-            var res = await stockApi.getDetailChart(p)
-            commit("set_detail_chart", res)
-            return res
-        },
-        
         async getDetailCompany({ commit }, p) {
             var res = await stockApi.getDetailCompany(p)
             return res

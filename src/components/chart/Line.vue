@@ -35,7 +35,7 @@ export default {
           code: this.$route.params.id,
           page: this.page,
         };
-        await this.$store.dispatch("priceStore/getDetailChart", p);
+        await this.$store.dispatch("priceStore/getChart", p);
         await this.$store.dispatch("companyStore/getChartNextLine", p);
         this.set();
       }
