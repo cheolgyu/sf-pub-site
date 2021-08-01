@@ -52,7 +52,14 @@ const priceStore = {
         },
         async getMarket({ commit }, p) {
             var res = await stockApi.getMarket(p)
-            return res
+            var res_arr = new Array()
+            res.forEach(element => {
+                if (element.cp_x1 != 0) {
+                    res_arr.push(element)
+                }
+            });
+
+            return res_arr
         },
 
         async geDayTrading({ commit }, p) {
