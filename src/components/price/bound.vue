@@ -6,13 +6,13 @@
     <table>
       <thead>
         <tr>
-          <td @click="sorting('x1')" class="clickable">시작 일</td>
-          <td @click="sorting('y1')" class="clickable">시작 가격</td>
-          <td @click="sorting('x2')" class="clickable">종료 일</td>
-          <td @click="sorting('y2')" class="clickable">종료 가격</td>
-          <td @click="sorting('x_tick')" class="clickable">누적 일</td>
-          <td @click="sorting('y_minus')" class="clickable">가격차이</td>
-          <td @click="sorting('y_percent')" class="clickable">퍼센트</td>
+          <th @click="sorting('x1')" class="clickable">시작 일</th>
+          <th @click="sorting('y1')" class="clickable">시작 가격</th>
+          <th @click="sorting('x2')" class="clickable">종료 일</th>
+          <th @click="sorting('y2')" class="clickable">종료 가격</th>
+          <th @click="sorting('x_tick')" class="clickable">누적 일</th>
+          <th @click="sorting('y_minus')" class="clickable">가격차이</th>
+          <th @click="sorting('y_percent')" class="clickable">퍼센트</th>
         </tr>
       </thead>
       <tbody>

@@ -3,18 +3,18 @@
     <summary>회사-기본정보</summary>
     <table>
       <tr>
-        <td>단축 코드</td>
-        <td>표준 코드</td>
-        <td>한글 종목명</td>
-        <td>한글 종목약명</td>
-        <td>영문 종목명</td>
-        <td>상장일</td>
-        <td>시장구분</td>
-        <td>증권구분</td>
-        <td>소속부</td>
-        <td>주식종류</td>
-        <td>액면가</td>
-        <td>상장주식수</td>
+        <th>단축 코드</th>
+        <th>표준 코드</th>
+        <th>한글 종목명</th>
+        <th>한글 종목약명</th>
+        <th>영문 종목명</th>
+        <th>상장일</th>
+        <th>시장구분</th>
+        <th>증권구분</th>
+        <th>소속부</th>
+        <th>주식종류</th>
+        <th>액면가</th>
+        <th>상장주식수</th>
       </tr>
       <tr>
         <td>{{ data.code }}</td>
