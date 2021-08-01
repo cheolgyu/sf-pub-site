@@ -23,7 +23,7 @@
           <td>{{ $fmt.money(item.y2) }}</td>
           <td>{{ item.x_tick }}</td>
           <td :class="$fmt.moneyColorClass(item.y_percent)">
-            {{ item.y_minus }}
+            {{ Number(item.y_minus  ) }}
           </td>
           <td :class="$fmt.moneyColorClass(item.y_percent)">
             {{ item.y_percent }}
