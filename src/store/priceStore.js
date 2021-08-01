@@ -56,10 +56,6 @@ const priceStore = {
             }
 
         },
-        set_detail_company(state, payload) {
-            state.company.set(payload.code, payload.data)
-
-        }
     }
 
     ,
@@ -83,11 +79,7 @@ const priceStore = {
             commit("set_detail_chart", res)
             return res
         },
-        async getDetailChartLine({ commit }, p) {
-            var res = await stockApi.getDetailChartLine(p)
-            commit("set_detail_chartline", res)
-            return res
-        },
+        
         async getDetailCompany({ commit }, p) {
             var res = await stockApi.getDetailCompany(p)
             return res

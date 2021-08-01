@@ -70,7 +70,7 @@ class Api {
         })
         return res
     }
-    async getDetailChartLine(p) {
+    async getChartNextLine(p) {
         var url = `/company/${p.code}/chart/next`
 
         const res = await axios.get(url).then(function (resp) {

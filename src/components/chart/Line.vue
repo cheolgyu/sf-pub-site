@@ -36,7 +36,7 @@ export default {
           page: this.page,
         };
         await this.$store.dispatch("priceStore/getDetailChart", p);
-        await this.$store.dispatch("priceStore/getDetailChartLine", p);
+        await this.$store.dispatch("companyStore/getChartNextLine", p);
         this.set();
       }
     },
