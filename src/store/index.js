@@ -1,7 +1,7 @@
 import { createStore } from 'vuex'
 
 import priceStore from './priceStore.js'
-import companyeStore from './companyeStore.js'
+import companyStore from './companyStore.js'
 import { stockApi } from '@/api/stock.js'
 
 var meta_config = new Map()
@@ -31,6 +31,6 @@ export default createStore({
   },
   modules: {
     priceStore: priceStore,
-    companyeStore: companyeStore
+    companyStore: companyStore
   }
 })

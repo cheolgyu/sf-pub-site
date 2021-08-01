@@ -5,9 +5,6 @@ const priceStore = {
     state: () => ({
         star: [],//JSON.parse(localStorage.getItem("star")),
         info: "",
-        
-        chartline: new Map(),
-        company: new Map(),
     }),
     mutations: {
         toggle_star(state, code) {
@@ -57,10 +54,7 @@ const priceStore = {
             var res = await stockApi.getMarket(p)
             return res
         },
-        async getDetailCompany({ commit }, p) {
-            var res = await stockApi.getDetailCompany(p)
-            return res
-        },
+
         async geDayTrading({ commit }, p) {
             var res = await stockApi.geDayTrading(p)
             return res
@@ -69,10 +63,7 @@ const priceStore = {
             var res = await stockApi.GetMonthlyPeek(p)
             return res
         },
-        async getCompanyRebound({ commit }, p) {
-            var res = await stockApi.getCompanyRebound(p)
-            return res
-        },
+
     }
 }
 export default priceStore

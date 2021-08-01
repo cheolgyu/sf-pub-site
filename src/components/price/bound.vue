@@ -119,7 +119,7 @@ export default {
       this.loading = true;
       this.param.code = this.$route.params.id;
       const data = await this.$store.dispatch(
-        "priceStore/getCompanyRebound",
+        "companyStore/getRebound",
         this.param
       );
 

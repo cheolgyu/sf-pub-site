@@ -96,7 +96,7 @@ export default {
       this.loading = true;
       this.param.code = this.$route.params.id;
       const data = await this.$store.dispatch(
-        "priceStore/getDetailCompany",
+        "companyStore/getCompany",
         this.param
       );
 

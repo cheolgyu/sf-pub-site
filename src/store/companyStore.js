@@ -1,9 +1,10 @@
-import { stockApi } from '@/api/stock.js'
+import { companyApi } from '@/api/stock.js'
 
-const priceStore = {
+const companyStore = {
     namespaced: true,
     state: () => ({
         chart: new Map(),
+        chartline: new Map(),
         company: new Map(),
     }),
     mutations: {
@@ -19,17 +20,27 @@ const priceStore = {
 
     ,
     actions: {
+        async getCompany({ commit }, p) {
+            var res = await companyApi.getCompany(p)
+            return res
+        },
+
         async getChart({ commit }, p) {
-            var res = await stockApi.getChart(p)
+            var res = await companyApi.getChart(p)
             commit("set_chart", res)
             return res
         },
 
         async getChartNextLine({ commit }, p) {
-            var res = await stockApi.getChartNextLine(p)
+            var res = await companyApi.getChartNextLine(p)
             commit("set_chart_next", res)
+            return res
+        },
+
+        async getRebound({ commit }, p) {
+            var res = await companyApi.getCompanyRebound(p)
             return res
         },
     }
 }
-export default priceStore
+export default companyStore

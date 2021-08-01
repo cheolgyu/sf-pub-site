@@ -35,17 +35,17 @@ export default {
           code: this.$route.params.id,
           page: this.page,
         };
-        await this.$store.dispatch("priceStore/getChart", p);
+        await this.$store.dispatch("companyStore/getChart", p);
         await this.$store.dispatch("companyStore/getChartNextLine", p);
         this.set();
       }
     },
     set() {
-      var data = this.$store.state.priceStore.chart
+      var data = this.$store.state.companyStore.chart
         .get(this.code)
         .get(this.page);
 
-      var data_line = this.$store.state.priceStore.chartline.get(this.code);
+      var data_line = this.$store.state.companyStore.chartline.get(this.code);
       if (data_line != null) {
         data["line"] = data_line;
       }

@@ -6,8 +6,8 @@ class Api {
         var host = process.env.VUE_APP_BACKEND_URL
         var url = "/config"
         var oReq = new XMLHttpRequest();
-        var res=""
-        
+        var res = ""
+
         oReq.onload = function (e) {
             // status는 response 상태 코드를 반환 : 200 => 정상 응답
             if (oReq.status === 200) {
@@ -55,6 +55,55 @@ class Api {
         return res
     }
 
+
+    async geDayTrading(p) {
+        var url = "/project/day_trading?"
+        url += `&market=${p.market.join()}`
+        url += `&rows=${p.rows}`
+        url += `&sort=${p.sort}`
+        url += `&desc=${p.desc}`
+        url += `&term=${p.term}`
+
+        const res = await axios.get(url).then(function (resp) {
+            return resp.data
+        }).catch(function (thrown) {
+            console.log('Request canceled', thrown.message);
+        });
+        return res
+    }
+    async GetMonthlyPeek(p) {
+        var url = "/project/monthly_peek?"
+        url += `&market=${p.market.join()}`
+        url += `&rows=${p.rows}`
+        url += `&sort=${p.sort}`
+        url += `&desc=${p.desc}`
+
+        const res = await axios.get(url).then(function (resp) {
+            return resp.data
+        }).catch(function (thrown) {
+            console.log('Request canceled', thrown.message);
+        });
+        return res
+    }
+
+}
+
+class Company {
+    async getCompany(p) {
+        var url = `/company/${p.code}`
+
+        const res = await axios.get(url).then(function (resp) {
+            return resp.data
+        })
+        var json_res = null;
+        try {
+            json_res = JSON.parse(res)
+        } catch (error) {
+            console.debug(error)
+        }
+        return json_res
+    }
+
     async getChart(p) {
         var url = `/company/${p.code}/chart?page=${p.page}`
 
@@ -98,49 +147,6 @@ class Api {
         })
         return res
     }
-    async getDetailCompany(p) {
-        var url = `/company/${p.code}`
-
-        const res = await axios.get(url).then(function (resp) {
-            return resp.data
-        })
-        var json_res = null;
-        try {
-            json_res = JSON.parse(res)
-        } catch (error) {
-            console.debug(error)
-        }
-        return json_res
-    }
-    async geDayTrading(p) {
-        var url = "/project/day_trading?"
-        url += `&market=${p.market.join()}`
-        url += `&rows=${p.rows}`
-        url += `&sort=${p.sort}`
-        url += `&desc=${p.desc}`
-        url += `&term=${p.term}`
-
-        const res = await axios.get(url).then(function (resp) {
-            return resp.data
-        }).catch(function (thrown) {
-            console.log('Request canceled', thrown.message);
-        });
-        return res
-    }
-    async GetMonthlyPeek(p) {
-        var url = "/project/monthly_peek?"
-        url += `&market=${p.market.join()}`
-        url += `&rows=${p.rows}`
-        url += `&sort=${p.sort}`
-        url += `&desc=${p.desc}`
-
-        const res = await axios.get(url).then(function (resp) {
-            return resp.data
-        }).catch(function (thrown) {
-            console.log('Request canceled', thrown.message);
-        });
-        return res
-    }
     async getCompanyRebound(p) {
         var url = `/company/${p.code}/rebound?page=${p.page}`
         url += `&rows=${p.rows}`
@@ -158,7 +164,8 @@ class Api {
 
 
 const stockApi = new Api()
+const companyApi = new Company()
 
-export { stockApi }
+export { stockApi, companyApi }
 
 // GET COMPANY DETAIL
