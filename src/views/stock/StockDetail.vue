@@ -15,35 +15,35 @@
   <ChartMonthlyPeek :data="peek" v-if="ready.company" />
   <br />
   <br />
-  <CompanyDetail :data="company_detail" v-if="ready.company" />
+  <TbDetail :data="company_detail" v-if="ready.company" />
   <br />
   <br />
-  <CompanyState :data="company_state" v-if="ready.company" />
+  <TbState :data="company_state" v-if="ready.company" />
   <br />
   <br />
-  <PriceBound />
+  <TbRebound />
   <br />
   <br />
   <details open v-show="ready.chart">
     <summary>그래프</summary>
-    <ChartLine v-model:is_ready="ready.chart" />
+    <ChartRebound v-model:is_ready="ready.chart" />
   </details>
 </template>
 <script>
 /*eslint no-unused-vars: "error"*/
-import ChartLine from "@/components/chart/Line.vue";
-import ChartMonthlyPeek from "@/components/chart/MonthlyPeek.vue";
-import CompanyDetail from "@/components/company/detail.vue";
-import CompanyState from "@/components/company/state.vue";
-import PriceBound from "@/components/price/bound.vue";
+import ChartRebound from "@/components/company/chart_rebound.vue";
+import ChartMonthlyPeek from "@/components/company/chart_monthly_peek.vue";
+import TbDetail from "@/components/company/tb_detail.vue";
+import TbState from "@/components/company/tb_state.vue";
+import TbRebound from "@/components/company/tb_rebound.vue";
 
 export default {
   components: {
-    ChartLine,
+    ChartRebound,
     ChartMonthlyPeek,
-    CompanyDetail,
-    CompanyState,
-    PriceBound,
+    TbState,
+    TbDetail,
+    TbRebound,
   },
   data() {
     return {
