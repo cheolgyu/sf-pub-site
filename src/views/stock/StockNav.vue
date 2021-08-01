@@ -11,7 +11,7 @@
       >
     </router-link>
 
-    | <router-link to="/stock/bound">반등</router-link> |
+    | <router-link to="/stock/rebound">반등</router-link> |
     <router-link to="/stock/day_trading">단타</router-link>    |
     <router-link to="/stock/monthly_peek">피크 월</router-link>   
   </div>

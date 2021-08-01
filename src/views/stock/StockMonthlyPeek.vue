@@ -2,14 +2,14 @@
   <div id="stock_day_trading">
     <h1>피크월 (거래량)</h1>
     <hr />
-    <GridMonthlyPeek />
+    <TbMonthlyPeek />
   </div>
 </template>
 <script>
-import GridMonthlyPeek from "@/components/grid/MonthlyPeek.vue";
+import TbMonthlyPeek from "@/components/grid/view/TbMonthlyPeek.vue";
 
 export default {
-  components: { GridMonthlyPeek },
+  components: { TbMonthlyPeek },
   data() {
     return {};
   },

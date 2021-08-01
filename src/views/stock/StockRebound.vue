@@ -10,7 +10,7 @@
       <br />
       <br />
       <br />
-      <GridMarket />
+      <TbMarket />
       <br />
       <br />
       <br />
@@ -25,7 +25,7 @@
       <br />
       <br />
       <br />
-      <GridPrice />
+      <TbPrice />
       <br />
       <br />
       <br />
@@ -38,13 +38,13 @@
   </div>
 </template>
 <script>
-import GridPrice from "@/components/grid/Price.vue";
-import GridMarket from "@/components/grid/Market.vue";
+import TbPrice from "@/components/grid/view/TbPrice.vue";
+import TbMarket from "@/components/grid/view/TbMarket.vue";
 
 export default {
   components: {
-    GridPrice,
-    GridMarket,
+    TbPrice,
+    TbMarket,
   },
   data() {
     return {};
