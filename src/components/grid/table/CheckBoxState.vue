@@ -1,5 +1,5 @@
 <template>
-  <details>
+  <details open>
     <summary>종목상태-상세</summary>
     <table>
       <thead>

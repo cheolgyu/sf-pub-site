@@ -1,7 +1,7 @@
 <template>
   <div class="grid_table_area">
-    <CheckBoxMarket v-model:chked="param.market" />
     <CheckBoxState v-model:state="param.state" />
+    <CheckBoxMarket v-model:chked="param.market" />
     <InputSearch v-model:search="param.search" />
     <br />
     <br />
