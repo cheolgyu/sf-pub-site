@@ -5,12 +5,19 @@
         {{
           name
         }}
-        <hr/>
-        <template v-for="(i, item) in p_show" :key="i">
-          <button :disabled="p_show[item]" @click="click_p_type(item)">
+        <hr />
+        <div v-for="(i, item) in p_show" :key="i">
+          <input
+            type="checkbox"
+            :name="i"
+            :id="i"
+            :checked="p_show[item]"
+            @click="click_p_type(item)"
+          />
+          <label :for="i">
             {{ p_text[item] }}
-          </button>
-        </template>
+          </label>
+        </div>
       </caption>
       <thead>
         <tr>
@@ -50,13 +57,11 @@
           <th class="p_type_th clickable" colspan="1"></th>
         </tr>
         <tr>
-          <TableTh :items="head" @chage_sort="on_sort" :p_show="p_show" />
+          <TableTh :items="head" @chage_sort="on_sort" :p_show="p_show"  :short_content="short_content"  />
         </tr>
       </thead>
       <tbody>
-        <template v-for="item in items" :key="item.code">
-          <TableTr :object="object" :item="item" :p_show="p_show" />
-        </template>
+          <TableTr v-for="item in items" :key="item.code" :object="object" :item="item" :p_show="p_show" :short_content="short_content"   />
       </tbody>
     </table>
   </div>
@@ -77,35 +82,36 @@ export default {
   data() {
     return {
       p_text: { cp: "종가", op: "시가", lp: "저가", hp: "고가" },
-      p_show: { cp: true, op: false, lp: false, hp: false },
+      p_show: { cp: true, op: true, lp: true, hp: true },
+      short_content: true,
       head: [
         { id: "name", sort: true, txt: "이름" },
         { id: "market", sort: true, txt: "마켓" },
 
-        { p_type: "cp", id: "cp_x1", sort: true, txt: "시작.일" },
-        { p_type: "cp", id: "cp_y1", sort: true, txt: "시작.원" },
-        { p_type: "cp", id: "cp_x2", sort: true, txt: "종료.일" },
-        { p_type: "cp", id: "cp_y2", sort: true, txt: "종료.원" },
-        { p_type: "cp", id: "cp_x_tick", sort: true, txt: "누적" },
-        { p_type: "cp", id: "cp_y_percent", sort: true, txt: "퍼센트" },
-        { p_type: "op", id: "op_x1", sort: true, txt: "시작.일" },
-        { p_type: "op", id: "op_y1", sort: true, txt: "시작.원" },
-        { p_type: "op", id: "op_x2", sort: true, txt: "종료.일" },
-        { p_type: "op", id: "op_y2", sort: true, txt: "종료.원" },
-        { p_type: "op", id: "op_x_tick", sort: true, txt: "누적" },
-        { p_type: "op", id: "op_y_percent", sort: true, txt: "퍼센트" },
-        { p_type: "lp", id: "lp_x1", sort: true, txt: "시작.일" },
-        { p_type: "lp", id: "lp_y1", sort: true, txt: "시작.원" },
-        { p_type: "lp", id: "lp_x2", sort: true, txt: "종료.일" },
-        { p_type: "lp", id: "lp_y2", sort: true, txt: "종료.원" },
-        { p_type: "lp", id: "lp_x_tick", sort: true, txt: "누적" },
-        { p_type: "lp", id: "lp_y_percent", sort: true, txt: "퍼센트" },
-        { p_type: "hp", id: "hp_x1", sort: true, txt: "시작.일" },
-        { p_type: "hp", id: "hp_y1", sort: true, txt: "시작.원" },
-        { p_type: "hp", id: "hp_x2", sort: true, txt: "종료.일" },
-        { p_type: "hp", id: "hp_y2", sort: true, txt: "종료.원" },
-        { p_type: "hp", id: "hp_x_tick", sort: true, txt: "누적" },
-        { p_type: "hp", id: "hp_y_percent", sort: true, txt: "퍼센트" },
+        { p_type: "cp", is_short_content:true, id: "cp_x1", sort: true, txt: "시작.일" },
+        { p_type: "cp", is_short_content:true, id: "cp_y1", sort: true, txt: "시작.원" },
+        { p_type: "cp", is_short_content:true, id: "cp_x2", sort: true, txt: "종료.일" },
+        { p_type: "cp", is_short_content:true, id: "cp_y2", sort: true, txt: "종료.원" },
+        { p_type: "cp", is_short_content:false, id: "cp_x_tick", sort: true, txt: "누적" },
+        { p_type: "cp", is_short_content:false, id: "cp_y_percent", sort: true, txt: "퍼센트" },
+        { p_type: "op", is_short_content:true, id: "op_x1", sort: true, txt: "시작.일" },
+        { p_type: "op", is_short_content:true, id: "op_y1", sort: true, txt: "시작.원" },
+        { p_type: "op", is_short_content:true, id: "op_x2", sort: true, txt: "종료.일" },
+        { p_type: "op", is_short_content:true, id: "op_y2", sort: true, txt: "종료.원" },
+        { p_type: "op", is_short_content:false, id: "op_x_tick", sort: true, txt: "누적" },
+        { p_type: "op", is_short_content:false, id: "op_y_percent", sort: true, txt: "퍼센트" },
+        { p_type: "lp", is_short_content:true, id: "lp_x1", sort: true, txt: "시작.일" },
+        { p_type: "lp", is_short_content:true, id: "lp_y1", sort: true, txt: "시작.원" },
+        { p_type: "lp", is_short_content:true, id: "lp_x2", sort: true, txt: "종료.일" },
+        { p_type: "lp", is_short_content:true, id: "lp_y2", sort: true, txt: "종료.원" },
+        { p_type: "lp", is_short_content:false, id: "lp_x_tick", sort: true, txt: "누적" },
+        { p_type: "lp", is_short_content:false, id: "lp_y_percent", sort: true, txt: "퍼센트" },
+        { p_type: "hp", is_short_content:true, id: "hp_x1", sort: true, txt: "시작.일" },
+        { p_type: "hp", is_short_content:true, id: "hp_y1", sort: true, txt: "시작.원" },
+        { p_type: "hp", is_short_content:true, id: "hp_x2", sort: true, txt: "종료.일" },
+        { p_type: "hp", is_short_content:true, id: "hp_y2", sort: true, txt: "종료.원" },
+        { p_type: "hp", is_short_content:false, id: "hp_x_tick", sort: true, txt: "누적" },
+        { p_type: "hp", is_short_content:false, id: "hp_y_percent", sort: true, txt: "퍼센트" },
 
         { id: "link", sort: false, txt: "네이버링크" },
       ],
