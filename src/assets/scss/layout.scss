@@ -1,3 +1,12 @@
+@use "sass:map";
+
+$bg-colors: (
+    "html": black,
+    "title-bar": rgb(31, 31, 31),
+    "left-menu": rgb(0, 0, 0),
+    "mask": rgb(255, 255, 255),
+);
+
 @media (max-width: 480px) {
     #left_area {
         display: none;
@@ -8,20 +17,12 @@
 }
 
 #menu_btn_area {
-    background-color: rgb(255, 208, 0);
+    background-color: map.get($bg-colors, "title-bar");
     width: 100%;
     height: 50px;
     flex-direction: row;
 }
-.left_area_on {
-    z-index: 10;
-    display: block !important;
-    position: absolute;
-}
-.left_area_off {
-    display: none;
-    position: relative;
-}
+
 @media screen and (min-width: 480px) {
     #left_area {
         display: block;
@@ -36,17 +37,24 @@
 }
 
 html {
-    background-color: black;
+    background-color: map.get($bg-colors, "html");
     overflow-y: scroll;
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    position: relative;
 }
-
+body {
+    margin: 0;
+    padding: 0;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: left;
     color: #fbfbfb;
-    padding: 1px;
+
     position: relative;
 }
 #mask {
@@ -56,13 +64,11 @@ html {
 
     width: 100%;
     height: 100%;
-    background-color: red;
-    opacity: 5%;
+    background-color: map.get($bg-colors, "mask");
+    opacity: 10%;
 }
 .container {
     display: flex;
-    padding: auto;
-    margin: auto;
 }
 
 #nav {
@@ -78,17 +84,12 @@ html {
     }
 }
 
-// flex-direction: row;
-/* flex-direction: column; */
-/* flex-direction: row-reverse; */
-/* flex-direction: column-reverse; */
-
 #right_area {
-    flex-direction: column;
-    background-color: black;
+    background-color: map.get($bg-colors, "d2");
     width: 100%;
-    text-align: left;
-    justify-items: left;
+    padding: 1%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 .title_bar {
     height: 150px;
@@ -103,22 +104,20 @@ html {
 }
 
 .title_bar span:first-child:hover {
-    background-color: blue;
+    opacity: 0.7;
 }
 .nav_item {
     padding: 1%;
+    margin-bottom: 3%;
     cursor: pointer;
+    border: 1px solid white;
+    border-radius: 15px;
 }
 .nav_item:hover {
-    background-color: blue;
+    opacity: 0.7;
 }
 .nav_item > p {
     padding-left: 1%;
-}
-#left_area {
-    background-color: rosybrown;
-    margin-top: 50px;
-    width: 300px;
 }
 
 #user_info {

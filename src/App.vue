@@ -36,7 +36,7 @@ export default {
     menu_btn_click(e) {
       var left_area = document.querySelector("#left_area").className;
       if (left_area == "left_area_on") {
-        this.close();
+        this.mask_close();
       } else {
         this.open();
       }

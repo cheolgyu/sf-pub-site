@@ -8,6 +8,7 @@ module.exports = {
                 prependData: `
                     @import "@/assets/scss/main.scss";
                     @import "@/assets/scss/layout.scss";
+                    @import "@/assets/scss/layout_left.scss";
                     @import "@/assets/scss/stock.scss";
                     @import "@/assets/scss/view/stockView.scss";
                     @import "@/assets/scss/view/gameBotView.scss";

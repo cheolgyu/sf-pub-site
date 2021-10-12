@@ -1,0 +1,40 @@
+@use "sass:map";
+
+#left_area {
+    background-color: map.get($bg-colors, "left-menu");
+    width: 300px !important;
+    padding: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+.left_area_on {
+    z-index: 10;
+    display: block !important;
+    position: absolute;
+}
+.left_area_off {
+    display: none;
+    position: relative;
+}
+#left_area nav {
+    display: flex;
+    flex-direction: column;
+}
+.left_nav_item {
+    flex-direction: column;
+    margin: 5%;
+    padding: 5%;
+}
+.left_nav_item a {
+    font-size: x-large;
+    font: bold;
+    color: white;
+    text-decoration: none;
+}
+.left_nav_item:hover {
+    border: 0.1px solid white;
+    border-radius: 15px;
+}
+.left_nav_item div {
+    float: left;
+}
