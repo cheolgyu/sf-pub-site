@@ -1,11 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Stock from '../views/stock/Stock.vue'
+import StockNav from '../views/stock/StockNav.vue'
 import StockHome from '../views/stock/StockHome.vue'
 import StockDetail from '../views/stock/StockDetail.vue'
 import StockRebound from '../views/stock/StockRebound.vue'
 import StockDayTrading from '../views/stock/StockDayTrading.vue'
 import StockMonthlyPeek from '../views/stock/StockMonthlyPeek.vue'
+import StockMarketHist from '../views/stock/StockMarketHist.vue'
 import GameBotView from '../views/GameBotView.vue'
 
 
@@ -17,13 +19,15 @@ const routes = [
   },
   {
     path: '/stock',
+    meta: { title: '주식' },
     component: Stock,
     children: [
-      { path: '', component: StockHome },
-      { path: 'rebound', component: StockRebound },
-      { path: 'day_trading', component: StockDayTrading },
-      { path: 'monthly_peek', component: StockMonthlyPeek },
-      { path: ':id', component: StockDetail ,name:"stock_id" },
+      { path: '', component: StockHome, meta: { title: '주식홈' } },
+      { path: 'rebound', component: StockRebound, meta: { title: '반등' } },
+      { path: 'day_trading', component: StockDayTrading, meta: { title: '단타' } },
+      { path: 'monthly_peek', component: StockMonthlyPeek, meta: { title: '피크월' } },
+      { path: 'market_hist', component: StockMarketHist, meta: { title: '마켓내역' } },
+      { path: ':id', component: StockDetail, name: "stock_id", meta: { title: '' } },
     ]
   },
 

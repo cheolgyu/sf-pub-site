@@ -1,10 +1,15 @@
 <template>
-  <div id="stock">
-    <h1>저가에 사서 고가에 팔기</h1>
-    {{ $store.state.priceStore.info }}
-    <hr />
-    <StockNav />
-    <router-view></router-view>
+  <div>
+    <div class="title_bar">
+      <span @click="$router.push($route.matched[0].path)">{{
+        $route.matched[0].meta.title
+      }}</span>
+      <span>&nbsp; > &nbsp; </span>
+      <span> {{ $route.meta.title }}</span>
+    </div>
+    <main>
+      <router-view></router-view>
+    </main>
   </div>
 </template>
 <script>

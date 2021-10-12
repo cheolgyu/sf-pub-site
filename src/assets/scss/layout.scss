@@ -1,3 +1,70 @@
+@media (max-width: 480px) {
+    #left_area {
+        display: none;
+    }
+    #menu_btn {
+        display: block;
+    }
+}
+
+#menu_btn_area {
+    background-color: rgb(255, 208, 0);
+    width: 100%;
+    height: 50px;
+    flex-direction: row;
+}
+.left_area_on {
+    z-index: 10;
+    display: block !important;
+    position: absolute;
+}
+.left_area_off {
+    display: none;
+    position: relative;
+}
+@media screen and (min-width: 480px) {
+    #left_area {
+        display: block;
+        // position: absolute;
+    }
+    #menu_btn {
+        display: none;
+    }
+}
+#menu_btn {
+    cursor: pointer;
+}
+
+html {
+    background-color: black;
+    overflow-y: scroll;
+}
+
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: left;
+    color: #fbfbfb;
+    padding: 1px;
+    position: relative;
+}
+#mask {
+    display: none;
+    position: absolute;
+    z-index: 10;
+
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    opacity: 5%;
+}
+.container {
+    display: flex;
+    padding: auto;
+    margin: auto;
+}
+
 #nav {
     padding: 30px;
 
@@ -9,4 +76,62 @@
             color: #42b983;
         }
     }
+}
+
+// flex-direction: row;
+/* flex-direction: column; */
+/* flex-direction: row-reverse; */
+/* flex-direction: column-reverse; */
+
+#right_area {
+    flex-direction: column;
+    background-color: black;
+    width: 100%;
+    text-align: left;
+    justify-items: left;
+}
+.title_bar {
+    height: 150px;
+}
+.title_bar span {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.title_bar span:first-child {
+    cursor: pointer;
+}
+
+.title_bar span:first-child:hover {
+    background-color: blue;
+}
+.nav_item {
+    padding: 1%;
+    cursor: pointer;
+}
+.nav_item:hover {
+    background-color: blue;
+}
+.nav_item > p {
+    padding-left: 1%;
+}
+#left_area {
+    background-color: rosybrown;
+    margin-top: 50px;
+    width: 300px;
+}
+
+#user_info {
+    max-height: 150px;
+}
+main {
+    width: 100%;
+}
+
+#user_info {
+    height: 250px;
+}
+
+.paging_cur_btn {
+    background-color: burlywood;
 }

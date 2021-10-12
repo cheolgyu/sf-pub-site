@@ -1,0 +1,132 @@
+<template>
+  <div id="stock_hist">
+    <table>
+      <caption>
+        코스피
+      </caption>
+      <thead>
+        <th>일자</th>
+        <th>시가</th>
+        <th>종가</th>
+        <th>저가</th>
+        <th>고가</th>
+        <th>전일대비 퍼센트</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>
+        코스닥
+      </caption>
+      <thead>
+        <th>일자</th>
+        <th>시가</th>
+        <th>종가</th>
+        <th>저가</th>
+        <th>고가</th>
+        <th>전일대비 퍼센트</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <caption>
+        코넥스
+      </caption>
+      <thead>
+        <th>일자</th>
+        <th>시가</th>
+        <th>종가</th>
+        <th>저가</th>
+        <th>고가</th>
+        <th>전일대비 퍼센트</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+        <tr>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+          <td>211212</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</template>
+<script>
+import Table from "../../components/grid/table/Table.vue";
+import Tr from "../../components/grid/table/Tr.vue";
+export default {
+  components: { Table, Tr },
+  data() {
+    return {};
+  },
+  setup() {},
+};
+</script>

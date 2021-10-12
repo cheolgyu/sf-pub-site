@@ -5185,11 +5185,6 @@ jsonfile@^4.0.0:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jspanel4@^4.11.4:
-  version "4.11.4"
-  resolved "https://registry.yarnpkg.com/jspanel4/-/jspanel4-4.11.4.tgz#5dcf2c236a0942521d2fc18ffbd762a2b76ce7bf"
-  integrity sha512-/znpamd5UKJTelsbFHpHt0QAybW4dWStj+kOFsvTl6k6dr5oR3ODiNRhetK3B1kOOFg841srdi2w3wD5X5uEiw==
-
 jsprim@^1.2.2:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsprim/-/jsprim-1.4.1.tgz#313e66bc1e5cc06e438bc1b7499c2e5c56acb6a2"
@@ -8441,8 +8436,10 @@ watchpack@^1.7.4:
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
+    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
+    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"
