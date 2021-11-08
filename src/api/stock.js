@@ -30,8 +30,8 @@ class Api {
         })
         return res
     }
-    async getPrice(p) {
-        var url = `/price/stock?page=${p.page}`
+    async getPriceReboundStock(p) {
+        var url = `/price/rebound/stock?page=${p.page}`
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
@@ -44,8 +44,8 @@ class Api {
         })
         return res
     }
-    async getMarket(p) {
-        var url = "/price/market?"
+    async getPriceReboundMarket(p) {
+        var url = "/price/rebound/market?"
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`
 
@@ -71,9 +71,12 @@ class Api {
         });
         return res
     }
-    async GetMonthlyPeek(p) {
+    async get_project_trading_volume(p) {
         var url = "/project/monthly_peek?"
         url += `&market=${p.market.join()}`
+        url += `&unit_type=${p.unit_type.up}`
+        url += `&unit_val=${p.unit_type.down}`
+
         url += `&rows=${p.rows}`
         url += `&sort=${p.sort}`
         url += `&desc=${p.desc}`

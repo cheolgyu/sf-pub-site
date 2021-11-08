@@ -46,12 +46,12 @@ const priceStore = {
             })
         },
         async getPrice({ commit }, p) {
-            var res = await stockApi.getPrice(p)
+            var res = await stockApi.getPriceReboundStock(p)
 
             return res
         },
         async getMarket({ commit }, p) {
-            var res = await stockApi.getMarket(p)
+            var res = await stockApi.getPriceReboundMarket(p)
             var res_arr = new Array()
             res.forEach(element => {
                 if (element.cp_x1 != 0) {
@@ -66,8 +66,8 @@ const priceStore = {
             var res = await stockApi.geDayTrading(p)
             return res
         },
-        async GetMonthlyPeek({ commit }, p) {
-            var res = await stockApi.GetMonthlyPeek(p)
+        async get_project_trading_volume({ commit }, p) {
+            var res = await stockApi.get_project_trading_volume(p)
             return res
         },
 

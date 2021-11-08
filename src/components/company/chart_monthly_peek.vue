@@ -4,8 +4,14 @@
       피크월( 거래량 )
       <template v-if="data == null">{{ this.empty_txt }}</template>
     </summary>
-    <div v-if="data != null">
-      <canvas ref="myDiv"></canvas>
+    <div v-if="data[0] != null">
+      <canvas ref="myDiv_1"></canvas>
+    </div>
+    <div v-if="data[1] != null">
+      <canvas ref="myDiv_2"></canvas>
+    </div>
+    <div v-if="data[2] != null">
+      <canvas ref="myDiv_3"></canvas>
     </div>
   </details>
 </template>
@@ -19,6 +25,20 @@ export default {
   },
   data() {
     return {
+      bg_color: [
+        "#E57373",
+        "#F06292",
+        "#BA68C8",
+        "#9575CD",
+        "#7986CB",
+        "#64B5F6",
+        "#4FC3F7",
+        "#4DD0E1",
+        "#4DB6AC",
+        "#81C784",
+        "#AED581",
+        "#DCE775",
+      ],
       empty_txt: ": 해당사항 없음.",
       myChart: null,
       config: null,
@@ -27,12 +47,17 @@ export default {
   },
   computed: {},
   mounted() {
+    console.log(this.data);
     this.set();
   },
   methods: {
     set() {
-      if (this.data != null && this.data["list"] !== undefined) {
-        this.draw(this.data["list"]);
+      console.log(this.data);
+      if (this.data != null && this.data !== undefined) {
+        console.log(this.data[0].max_rate);
+        this.draw(this.data[0]);
+        this.draw(this.data[1]);
+        this.draw(this.data[2]);
       }
     },
 
@@ -42,34 +67,39 @@ export default {
         datasets: [
           {
             data: [],
-            backgroundColor: [
-              "#E57373",
-              "#F06292",
-              "#BA68C8",
-              "#9575CD",
-              "#7986CB",
-              "#64B5F6",
-              "#4FC3F7",
-              "#4DD0E1",
-              "#4DB6AC",
-              "#81C784",
-              "#AED581",
-              "#DCE775",
-            ],
-            hoverOffset: 100,
+            backgroundColor: this.bg_color,
+            hoverOffset: 4,
+          },
+          {
+            data: [],
+            backgroundColor: this.bg_color,
+            hoverOffset: 4,
           },
         ],
       };
 
-      var abc = new Object();
-      inp.forEach((element) => {
-        Object.assign(abc, element);
-      });
+      var unit_txt = "";
+      switch (inp.unit_type) {
+        case 1:
+          unit_txt = " 주 ";
+          break;
 
-      Object.keys(abc).forEach((element) => {
-        abc[element];
-        data.datasets[0].data.push(abc[element]);
-        data.labels.push(element + "월");
+        case 2:
+          unit_txt = " 월 ";
+          break;
+        case 3:
+          unit_txt = " 분기 ";
+          break;
+      }
+
+      var abc = new Object();
+      Object.keys(inp.max_rate).forEach((key) => {
+        data.datasets[1].data.push(inp.max_rate[key]);
+        data.labels.push(key + unit_txt);
+      });
+      Object.keys(inp.min_rate).forEach((key) => {
+        data.datasets[0].data.push(inp.max_rate[key]);
+        data.labels.push(key + unit_txt);
       });
 
       var config = {
@@ -83,8 +113,19 @@ export default {
           responsive: true,
         },
       };
-      this.myChart = chart(this.$refs.myDiv, config);
-      //this.myChart.update();
+
+      switch (inp.unit_type) {
+        case 1:
+          this.myChart = chart(this.$refs.myDiv_1, config);
+          break;
+
+        case 2:
+          this.myChart = chart(this.$refs.myDiv_2, config);
+          break;
+        case 3:
+          this.myChart = chart(this.$refs.myDiv_3, config);
+          break;
+      }
     },
   },
 };

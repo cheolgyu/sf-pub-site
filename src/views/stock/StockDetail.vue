@@ -12,7 +12,7 @@
   </p>
   <br />
   <br />
-  <ChartMonthlyPeek :data="peek" v-if="ready.company" />
+  <ChartMonthlyPeek :data="volume" v-if="ready.company" />
   <br />
   <br />
   <TbDetail :data="company_detail" v-if="ready.company" />
@@ -55,7 +55,7 @@ export default {
       company_code: {},
       company_detail: {},
       company_state: {},
-      peek: {},
+      volume: {},
 
       ready: {
         company: false,
@@ -106,7 +106,7 @@ export default {
           this.company_detail = data.d;
           this.company_detail.name = data.c.name;
           this.company_state = data.s;
-          this.peek = data.peek;
+          this.volume = data.volume.json_agg;
           this.ready.company = true;
         }
       }

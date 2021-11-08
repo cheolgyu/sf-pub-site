@@ -27,14 +27,20 @@ export default {
         {
           k: "monthly_peek",
           to: "/stock/monthly_peek",
-          txt: "피크월",
-          desc: "특정월에 거래량이 몰리는 종목입니다.",
+          txt: "거래량",
+          desc: "거래량이 몰리는 단위(주,월,분기)를 찾습니다. ",
         },
         {
           k: "market_hist",
           to: "/stock/market_hist",
           txt: "마켓내역",
           desc: "일자별 마켓의 가격내역 입니다.",
+        },
+        {
+          k: "market_hist",
+          to: "/stock/market_hist",
+          txt: "52주",
+          desc: "52주 최저가/최고가와 가까운 순서로 나열합니다.",
         },
       ],
     };

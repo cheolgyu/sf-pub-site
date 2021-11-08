@@ -34,8 +34,6 @@ export default {
   methods: {
     async fetchData() {
       await this.$store.dispatch("priceStore/getInfo");
-      await this.$store.dispatch("get_config", "market_type");
-      await this.$store.dispatch("get_config", "price_type");
     },
   },
 };

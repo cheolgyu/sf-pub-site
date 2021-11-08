@@ -32,15 +32,16 @@ export default {
     //this.set_market();
   },
   created() {
-    this.set_market();
+    this.set_defualt();
   },
   methods: {
-    set_market() {
+    set_defualt() {
       this.$store.dispatch("get_config", "market_type").then((res) => {
         this.market_list = res;
         res.forEach((element) => {
           this.checked_values.push(element.id);
         });
+        this.change()
       });
     },
     change(event) {
