@@ -5,13 +5,16 @@
       <template v-if="data == null">{{ this.empty_txt }}</template>
     </summary>
     <div v-if="data[0] != null">
-      <canvas ref="myDiv_1"></canvas>
+      <canvas ref="10" width="200" height="200"></canvas>
+      <canvas ref="11"></canvas>
     </div>
     <div v-if="data[1] != null">
-      <canvas ref="myDiv_2"></canvas>
+      <canvas ref="20"></canvas>
+      <canvas ref="21"></canvas>
     </div>
     <div v-if="data[2] != null">
-      <canvas ref="myDiv_3"></canvas>
+      <canvas ref="30"></canvas>
+      <canvas ref="31"></canvas>
     </div>
   </details>
 </template>
@@ -40,28 +43,68 @@ export default {
         "#DCE775",
       ],
       empty_txt: ": 해당사항 없음.",
-      myChart: null,
+      myChart: [],
       config: null,
       type: "doughnut",
+      txt: {
+        title: " 거래량 ",
+        unit: ["", "주", "월", "분기"],
+        max: "최대",
+        min: "최소",
+      },
     };
   },
   computed: {},
   mounted() {
-    console.log(this.data);
     this.set();
   },
   methods: {
     set() {
-      console.log(this.data);
       if (this.data != null && this.data !== undefined) {
-        console.log(this.data[0].max_rate);
-        this.draw(this.data[0]);
-        this.draw(this.data[1]);
-        this.draw(this.data[2]);
+        this.draw_max_min(this.data[0]);
+        this.draw_max_min(this.data[1]);
+        this.draw_max_min(this.data[2]);
       }
     },
 
-    draw(inp) {
+    draw_max_min(inp) {
+      var max_cfg = this.set_data(
+        inp.unit_type,
+        inp.max_rate,
+        this.chart_cfg(),
+        this.txt.max
+      );
+      var min_cfg = this.set_data(
+        inp.unit_type,
+        inp.min_rate,
+        this.chart_cfg(),
+        this.txt.min
+      );
+      var refs_nm_max = inp.unit_type + "0";
+      var refs_nm_min = inp.unit_type + "1";
+
+      this.myChart[inp.unit_type] = [];
+      this.myChart[inp.unit_type].push(chart(this.$refs[refs_nm_max], max_cfg));
+      this.myChart[inp.unit_type].push(chart(this.$refs[refs_nm_min], min_cfg));
+    },
+
+    set_data(unit_type, obj, cfg, max_min_txt) {
+      var arr_label = [];
+      var arr_data = [];
+      Object.keys(obj).forEach((key) => {
+        var lb = key + this.txt.unit[unit_type];
+        var d = obj[key];
+        arr_label.push(lb);
+        arr_data.push(d);
+      });
+      cfg.data.datasets[0].data = arr_data;
+      cfg.data.labels = arr_label;
+      cfg.options.plugins.title.text =
+        max_min_txt + " " + this.txt.unit[unit_type] + "";
+      return cfg;
+    },
+
+    chart_cfg() {
       var data = {
         labels: [],
         datasets: [
@@ -78,54 +121,26 @@ export default {
         ],
       };
 
-      var unit_txt = "";
-      switch (inp.unit_type) {
-        case 1:
-          unit_txt = " 주 ";
-          break;
-
-        case 2:
-          unit_txt = " 월 ";
-          break;
-        case 3:
-          unit_txt = " 분기 ";
-          break;
-      }
-
-      var abc = new Object();
-      Object.keys(inp.max_rate).forEach((key) => {
-        data.datasets[1].data.push(inp.max_rate[key]);
-        data.labels.push(key + unit_txt);
-      });
-      Object.keys(inp.min_rate).forEach((key) => {
-        data.datasets[0].data.push(inp.max_rate[key]);
-        data.labels.push(key + unit_txt);
-      });
-
       var config = {
         type: this.type,
         data: data,
         options: {
-          //가로세로 비율
+          // 가로세로 비율
           aspectRatio: window.innerWidth < 600 ? 1 : 3.5,
-
-          //차틑 겹치게
+          plugins: {
+            legend: {
+              position: "top",
+            },
+            title: {
+              display: true,
+              text: "거래량1",
+            },
+          },
           responsive: true,
         },
       };
 
-      switch (inp.unit_type) {
-        case 1:
-          this.myChart = chart(this.$refs.myDiv_1, config);
-          break;
-
-        case 2:
-          this.myChart = chart(this.$refs.myDiv_2, config);
-          break;
-        case 3:
-          this.myChart = chart(this.$refs.myDiv_3, config);
-          break;
-      }
+      return config;
     },
   },
 };
