@@ -4,17 +4,19 @@
       피크월( 거래량 )
       <template v-if="data == null">{{ this.empty_txt }}</template>
     </summary>
-    <div v-if="data[0] != null">
-      <canvas ref="10" width="200" height="200"></canvas>
-      <canvas ref="11"></canvas>
-    </div>
-    <div v-if="data[1] != null">
-      <canvas ref="20"></canvas>
-      <canvas ref="21"></canvas>
-    </div>
-    <div v-if="data[2] != null">
-      <canvas ref="30"></canvas>
-      <canvas ref="31"></canvas>
+    <div>
+      <div v-if="data[0] != null" class="row_chart_monthly_peek">
+        <canvas ref="10"></canvas>
+        <canvas ref="11"></canvas>
+      </div>
+      <div v-if="data[1] != null" class="row_chart_monthly_peek">
+        <canvas ref="20"></canvas>
+        <canvas ref="21"></canvas>
+      </div>
+      <div v-if="data[2] != null" class="row_chart_monthly_peek">
+        <canvas ref="30"></canvas>
+        <canvas ref="31"></canvas>
+      </div>
     </div>
   </details>
 </template>
@@ -47,10 +49,9 @@ export default {
       config: null,
       type: "doughnut",
       txt: {
-        title: " 거래량 ",
         unit: ["", "주", "월", "분기"],
-        max: "최대",
-        min: "최소",
+        max: "평균 이상",
+        min: "평균 이하",
       },
     };
   },
@@ -126,17 +127,27 @@ export default {
         data: data,
         options: {
           // 가로세로 비율
-          aspectRatio: window.innerWidth < 600 ? 1 : 3.5,
+          //aspectRatio: window.innerWidth < 600 ? 1 : 3.5,
           plugins: {
             legend: {
               position: "top",
+              labels: {
+                // This more specific font property overrides the global property
+                font: {
+                  size: 20,
+                },
+              },
             },
             title: {
               display: true,
               text: "거래량1",
+              // This more specific font property overrides the global property
+              font: {
+                size: 20,
+              },
             },
           },
-          responsive: true,
+          responsive: false,
         },
       };
 
@@ -147,4 +158,9 @@ export default {
 </script>
 
 <style>
+.row_chart_monthly_peek {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 </style>

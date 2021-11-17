@@ -28,7 +28,7 @@ export default {
           k: "monthly_peek",
           to: "/stock/monthly_peek",
           txt: "거래량",
-          desc: "거래량이 몰리는 단위(주,월,분기)를 찾습니다. ",
+          desc: "거래량이 몰리는 단위(주,월,분기)의 비중을 보여줍니다. ",
         },
         {
           k: "market_hist",
