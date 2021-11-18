@@ -27,11 +27,6 @@ const companyStore = {
 
     ,
     actions: {
-        async getCompany({ commit }, p) {
-            var res = await companyApi.getCompany(p)
-            return res
-        },
-
         async getChart({ commit }, p) {
             var res = await companyApi.getChart(p)
             commit("set_chart", res)

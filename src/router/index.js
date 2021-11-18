@@ -15,7 +15,8 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: { title: '홈' },
   },
   {
     path: '/stock',
@@ -34,13 +35,22 @@ const routes = [
   {
     path: '/gamebot',
     name: 'GameBot',
-    component: GameBotView
+    component: GameBotView,
+    meta: { title: '게임봇' },
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title;
+  next();
+});
+router.afterEach((to, from, failure) => {
+  //if (!failure) sendToAnalytics(to.fullPath)
 })
 
 export default router

@@ -17,7 +17,7 @@ import StockNav from "./StockNav.vue";
 
 export default {
   setup(props) {},
-  beforeCreate() {},
+
   components: { StockNav },
   data() {
     return {};

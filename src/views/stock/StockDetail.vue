@@ -30,7 +30,8 @@
   </details>
 </template>
 <script>
-/*eslint no-unused-vars: "error"*/
+import { companyApi } from "@/api/stock.js";
+
 import ChartRebound from "@/components/company/chart_rebound.vue";
 import ChartMonthlyPeek from "@/components/company/chart_monthly_peek.vue";
 import TbDetail from "@/components/company/tb_detail.vue";
@@ -38,6 +39,15 @@ import TbState from "@/components/company/tb_state.vue";
 import TbRebound from "@/components/company/tb_rebound.vue";
 
 export default {
+  beforeRouteEnter(to, from, next) {
+    companyApi.getCompany(to.params.id).then((response) => {
+      var title = `${response.c.name}(${response.c.code})`;
+      document.title = title;
+      to.meta.title = title;
+      next((vm) => vm.setData(response));
+    });
+  },
+  setup() {},
   components: {
     ChartRebound,
     ChartMonthlyPeek,
@@ -63,20 +73,6 @@ export default {
       },
     };
   },
-  created() {
-    this.$watch(
-      () => this.$route.params,
-      () => {
-        // mounted 에서 하기. 뒤로가기 시 오류남.
-        //this.fetchData();
-      },
-      { immediate: true }
-    );
-  },
-  mounted() {
-    this.fetchData();
-  },
-  computed: {},
   methods: {
     title() {
       if (this.company_code.code === undefined) {
@@ -88,18 +84,7 @@ export default {
     naver_link(code) {
       return "https://finance.naver.com/item/main.nhn?code=" + code;
     },
-    setData(company) {
-      this.cmp = company;
-    },
-    async fetchData() {
-      this.error = this.post = null;
-      this.loading = true;
-      this.param.code = this.$route.params.id;
-      const data = await this.$store.dispatch(
-        "companyStore/getCompany",
-        this.param
-      );
-
+    setData(data) {
       if (data != null) {
         this.company_code = data.c;
         if (data.d !== undefined) {
@@ -110,7 +95,6 @@ export default {
           this.ready.company = true;
         }
       }
-      this.loading = false;
     },
   },
 };

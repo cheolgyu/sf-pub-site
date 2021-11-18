@@ -93,7 +93,7 @@ class Api {
 
 class Company {
     async getCompany(p) {
-        var url = `/company/${p.code}`
+        var url = `/company/${p}`
 
         const res = await axios.get(url).then(function (resp) {
             return resp.data

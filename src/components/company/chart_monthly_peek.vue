@@ -47,7 +47,7 @@ export default {
       empty_txt: ": 해당사항 없음.",
       myChart: [],
       config: null,
-      type: "doughnut",
+      type: "pie",
       txt: {
         unit: ["", "주", "월", "분기"],
         max: "평균 이상",
