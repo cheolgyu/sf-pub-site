@@ -1,33 +1,35 @@
 <template>
   <hr />
   <h3>{{ title() }}</h3>
-  <p>
-    <a
-      target="_blank"
-      :href="naver_link(company_code.code)"
-      v-if="ready.company"
-    >
-      네이버 이동
-    </a>
-  </p>
-  <br />
-  <br />
-  <ChartMonthlyPeek :data="volume" v-if="ready.company" />
-  <br />
-  <br />
-  <TbDetail :data="company_detail" v-if="ready.company" />
-  <br />
-  <br />
-  <TbState :data="company_state" v-if="ready.company" />
-  <br />
-  <br />
-  <TbRebound />
-  <br />
-  <br />
-  <details open v-show="ready.chart">
-    <summary>그래프</summary>
-    <ChartRebound v-model:is_ready="ready.chart" />
-  </details>
+  <div class="stock-detail-area">
+    <div class="contents">
+      <a
+        target="_blank"
+        :href="naver_link(company_code.code)"
+        v-if="ready.company"
+      >
+        네이버 이동
+      </a>
+      <div class="content">
+        <TbDetail :data="company_detail" v-if="ready.company" />
+        <TbState :data="company_state" v-if="ready.company" />
+      </div>
+      <div class="content">
+        <ChartMonthlyPeek :data="volume" v-if="ready.company" />
+      </div>
+
+      <div class="content">
+        <TbRebound />
+      </div>
+      <div class="content">
+        <details open v-show="ready.chart">
+          <summary>그래프</summary>
+          <ChartRebound v-model:is_ready="ready.chart" />
+        </details>
+      </div>
+    </div>
+    <div class="right-area"></div>
+  </div>
 </template>
 <script>
 import { companyApi } from "@/api/stock.js";
@@ -99,3 +101,22 @@ export default {
   },
 };
 </script>
+<style scoped>
+.stock-detail-area {
+  display: flex;
+  flex-direction: column;
+  scroll-snap-type: y proximity;
+}
+.content {
+  margin-top: 10vh;
+  scroll-snap-align: start;
+  min-height: 100vh;
+}
+.contents {
+  /* width: 70%; */
+}
+.right-area {
+  /* width: 20%; */
+}
+</style>>
+
