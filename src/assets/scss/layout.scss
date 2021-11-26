@@ -1,4 +1,5 @@
 @use "sass:map";
+$base-midea-width: 769px;
 
 $bg-colors: (
     "html": black,
@@ -7,7 +8,7 @@ $bg-colors: (
     "mask": rgb(255, 255, 255),
 );
 
-@media (max-width: 480px) {
+@media (max-width: $base-midea-width) {
     #left_area {
         display: none;
     }
@@ -23,7 +24,7 @@ $bg-colors: (
     flex-direction: row;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: $base-midea-width) {
     #left_area {
         display: block;
         // position: absolute;
