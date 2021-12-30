@@ -8,7 +8,9 @@ import StockRebound from '../views/stock/StockRebound.vue'
 import StockDayTrading from '../views/stock/StockDayTrading.vue'
 import StockMonthlyPeek from '../views/stock/StockMonthlyPeek.vue'
 import StockMarketHist from '../views/stock/StockMarketHist.vue'
+import Stock52Weeks from '../views/stock/Stock52Weeks.vue'
 import GameBotView from '../views/GameBotView.vue'
+
 
 
 const routes = [
@@ -28,6 +30,7 @@ const routes = [
       { path: 'day_trading', component: StockDayTrading, meta: { title: '단타' } },
       { path: 'monthly_peek', component: StockMonthlyPeek, meta: { title: '피크월' } },
       { path: 'market_hist', component: StockMarketHist, meta: { title: '마켓내역' } },
+      { path: '52weeks', component: Stock52Weeks, meta: { title: '52주' } },
       { path: ':id', component: StockDetail, name: "stock_id", meta: { title: '' } },
     ]
   },

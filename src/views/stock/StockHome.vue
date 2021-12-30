@@ -37,8 +37,8 @@ export default {
           desc: "일자별 마켓의 가격내역 입니다.",
         },
         {
-          k: "market_hist",
-          to: "/stock/market_hist",
+          k: "52weeks",
+          to: "/stock/52weeks",
           txt: "52주",
           desc: "52주 최저가/최고가와 가까운 순서로 나열합니다.",
         },
